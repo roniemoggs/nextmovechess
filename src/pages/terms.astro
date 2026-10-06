@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+
+const termsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Terms & Conditions - Next Move Chess',
+  description: 'Terms of Service, acceptable use policy, and fair play conditions for nextmovechesss.com.',
+  url: 'https://nextmovechesss.com/terms',
+};
+---
+
+<BaseLayout
+  title="Terms & Conditions - Next Move Chess"
+  description="Terms of Service, conditions of use, and Fair Play policies for nextmovechesss.com."
+  keywords="terms and conditions, terms of service, next move chess terms, fair play policy chess, stockfish gpl license"
+  activePath="/terms"
+  schema={termsSchema}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-10">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: 'Terms & Conditions' },
+      ]}
+    />
+
+    <!-- Header -->
+    <header class="space-y-3">
+      <Badge text="Legal & Compliance" variant="mono" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5]">
+        Terms & Conditions
+      </h1>
+      <p class="text-sm text-[#71717a] font-mono">
+        Effective Date: March 2026 · Last Updated: March 2026 · Domain: nextmovechesss.com
+      </p>
+    </header>
+
+    <!-- Content Card -->
+    <Card class="p-6 sm:p-10 space-y-8 text-[15px] text-[#a1a1aa] leading-relaxed border-[#27272a]">
+      <!-- 1. Acceptance -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">01.</span> Acceptance of Terms
+        </h2>
+        <p>
+          Welcome to Next Move Chess (<strong class="text-[#f4f4f5]">nextmovechesss.com</strong>). By accessing, browsing, or using our website, calculation tools, interactive boards, and instructional articles, you acknowledge that you have read, understood, and agreed to be bound by these Terms & Conditions ("Terms") and our <a href="/privacy" class="text-[#00dfd8] hover:underline">Privacy Policy</a>.
+        </p>
+        <p>
+          If you do not agree with any part of these Terms, you must discontinue your use of our platform immediately.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 2. Permitted Use & Service Scope -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">02.</span> Scope of Service & Permitted Use
+        </h2>
+        <p>
+          Next Move Chess provides an in-browser chess move calculator, tactical analysis interface, opening reference guides, and educational materials. The platform is designed solely for:
+        </p>
+        <ul class="list-disc pl-6 space-y-1.5 text-[14px]">
+          <li>Post-game analysis and game reviewing</li>
+          <li>Individual training, puzzle exploration, and tactical calculation practice</li>
+          <li>Opening preparation and theoretical study</li>
+          <li>Chess coaching, instructional demonstration, and classroom analysis</li>
+        </ul>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 3. Strict Fair Play Policy -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">03.</span> Strict Fair Play & Anti-Cheating Compliance
+        </h2>
+        <div class="p-4 sm:p-5 rounded-[10px] bg-[#f5a623]/10 border border-[#f5a623]/30 text-[#f4f4f5] space-y-2">
+          <div class="flex items-center gap-2 text-[#f5a623] font-semibold text-base">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>Prohibited Live Game Assistance</span>
+          </div>
+          <p class="text-[14px] text-[#f4f4f5] leading-relaxed">
+            You are strictly prohibited from using Next Move Chess to calculate moves, generate engine evaluations, or obtain assistance during active, live competitive games on third-party platforms (such as Chess.com, Lichess.org, Chess24, FIDE Online Arena, or over-the-board tournaments).
+          </p>
+          <p class="text-[13px] text-[#a1a1aa] leading-relaxed">
+            Using engine calculations during live games violates the Fair Play rules of online chess communities and constitutes unauthorized cheating. We promote fair play, sportsmanship, and authentic chess improvement.
+          </p>
+        </div>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 4. Intellectual Property & Open Source Licenses -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">04.</span> Intellectual Property & Open Source Licensing
+        </h2>
+        <p>
+          The layout, visual branding, unique UI components, guides, tutorials, and domain assets of <strong class="text-[#f4f4f5]">nextmovechesss.com</strong> are protected by applicable intellectual property and copyright laws.
+        </p>
+        <p>
+          <strong class="text-[#f4f4f5]">Stockfish Engine Attribution:</strong> The underlying chess engine utilized in the calculator is Stockfish, an open-source neural engine licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer" class="text-[#00dfd8] hover:underline">GNU General Public License v3 (GPL v3)</a>. Stockfish is developed and maintained by the Stockfish open-source community.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 5. User Conduct & Limitations -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">05.</span> Acceptable Use & Platform Conduct
+        </h2>
+        <p>
+          You agree not to engage in any of the following restricted activities:
+        </p>
+        <ul class="list-disc pl-6 space-y-1.5 text-[14px]">
+          <li>Attempting to bypass, reverse engineer, or impair the security of the website.</li>
+          <li>Deploying automated scrapers, crawlers, or denial-of-service vectors that unduly tax our hosting infrastructure.</li>
+          <li>Misrepresenting your identity or transmitting fraudulent messages through our contact channels.</li>
+        </ul>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 6. Disclaimers & Warranties -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">06.</span> Disclaimer of Warranties
+        </h2>
+        <p>
+          The service is provided on an <strong class="text-[#f4f4f5]">"AS IS"</strong> and <strong class="text-[#f4f4f5]">"AS AVAILABLE"</strong> basis without warranties of any kind, whether express or implied. While we strive for extreme numerical precision and uptime, Next Move Chess does not warrant that calculations will be uninterrupted, error-free, or free of subtle evaluation discrepancies across differing hardware profiles.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 7. Limitation of Liability -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">07.</span> Limitation of Liability
+        </h2>
+        <p>
+          In no event shall Next Move Chess, its creators, or contributors be liable for any indirect, incidental, special, consequential, or punitive damages arising from your access to or inability to access the service, even if advised of the possibility of such damages.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 8. Modifications -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">08.</span> Modifications to Terms
+        </h2>
+        <p>
+          We reserve the right to revise or replace these Terms at our sole discretion. Any changes will become effective immediately upon posting. Your continued use of the website following the posting of updated Terms constitutes your binding acceptance.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 9. Contact Info -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">09.</span> Contact & Legal Inquiries
+        </h2>
+        <p>
+          For legal inquiries, licensing questions, or questions regarding these Terms, please reach out via our <a href="/contact" class="text-[#00dfd8] hover:underline">Contact Page</a> or write directly to <span class="font-mono text-[#f4f4f5]">legal@nextmovechesss.com</span>.
+        </p>
+      </section>
+    </Card>
+  </div>
+</BaseLayout>

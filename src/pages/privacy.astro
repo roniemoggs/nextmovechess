@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+
+const privacySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Privacy Policy - Next Move Chess',
+  description: 'Privacy Policy and data protection details for nextmovechesss.com. Learn how we preserve user privacy through client-side WebAssembly computation.',
+  url: 'https://nextmovechesss.com/privacy',
+};
+---
+
+<BaseLayout
+  title="Privacy Policy - Next Move Chess"
+  description="Privacy policy and data protection details for nextmovechesss.com. Learn how we protect your privacy with client-side WebAssembly chess evaluation."
+  keywords="privacy policy, next move chess privacy, data protection, chess privacy, stockfish client side"
+  activePath="/privacy"
+  schema={privacySchema}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-10">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: 'Privacy Policy' },
+      ]}
+    />
+
+    <!-- Page Header -->
+    <header class="space-y-3">
+      <Badge text="Legal & Compliance" variant="mono" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5]">
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-[#71717a] font-mono">
+        Effective Date: March 2026 · Last Updated: March 2026 · Domain: nextmovechesss.com
+      </p>
+    </header>
+
+    <!-- Main Content -->
+    <Card class="p-6 sm:p-10 space-y-8 text-[15px] text-[#a1a1aa] leading-relaxed border-[#27272a]">
+      <!-- 1. Introduction -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">01.</span> Overview & Core Privacy Commitment
+        </h2>
+        <p>
+          At Next Move Chess (<strong class="text-[#f4f4f5]">nextmovechesss.com</strong>, "we", "our", or "us"), we are committed to respecting and protecting the privacy of our visitors and users. This Privacy Policy outlines the types of information we may collect, how that information is handled, and the principles we adhere to when you visit or use our chess move calculator, board analysis, and learning guides.
+        </p>
+        <p>
+          Our foundational design philosophy is <strong class="text-[#f4f4f5]">Privacy by Architecture</strong>. Wherever technically feasible, calculation workloads, game configurations, and interactive states are executed locally on your device rather than being transmitted to or stored on our servers.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 2. Client-Side Processing Architecture -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">02.</span> Client-Side Chess Calculation (Zero Server Logging)
+        </h2>
+        <p>
+          When you use the Next Move Chess calculator or analysis board:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-[#a1a1aa]">
+          <li>
+            <strong class="text-[#f4f4f5]">Local WebAssembly Execution:</strong> The Stockfish engine is downloaded once as a WebAssembly (WASM) binary and executes entirely within your browser's dedicated background Web Worker thread.
+          </li>
+          <li>
+            <strong class="text-[#f4f4f5]">No Game Position Transmission:</strong> The chess positions, piece placements, FEN (Forsyth-Edwards Notation) strings, and PGN (Portable Game Notation) moves you input are evaluated locally on your device CPU. They are not uploaded, saved, analyzed, or stored on our remote servers.
+          </li>
+          <li>
+            <strong class="text-[#f4f4f5]">No Account Requirement:</strong> You do not need to register, create a profile, or submit personal credentials to access full engine calculation depths and analysis features.
+          </li>
+        </ul>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 3. Information We Collect -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">03.</span> Information We May Collect
+        </h2>
+        <p>
+          While we do not collect your chess analysis data, standard web interactions may generate minimal technical logs:
+        </p>
+        <div class="space-y-3 pl-2">
+          <div>
+            <h3 class="font-semibold text-[#f4f4f5] text-[15px]">A. Server & Technical Telemetry</h3>
+            <p class="text-[14px]">
+              Like standard web hosts, our hosting and CDN providers (e.g. Cloudflare / Vercel / Netlify) may temporarily log standard HTTP access information such as IP addresses, browser user agent strings, requested URLs, referral pages, and timestamps. This technical information is used exclusively to maintain site availability, defend against DDoS attacks, and diagnose infrastructure health.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-[#f4f4f5] text-[15px]">B. Feedback & Contact Inquiries</h3>
+            <p class="text-[14px]">
+              If you voluntarily submit feedback, bug reports, or messages through our <a href="/contact" class="text-[#00dfd8] hover:underline">Contact Form</a> or direct email, we collect the name, email address, and message content you supply solely to respond to your inquiry. We never sell, rent, or share your contact info with third-party marketers.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 4. Local Storage & Cookies -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">04.</span> Local Storage & Browser Preferences
+        </h2>
+        <p>
+          We use modern browser <code class="text-[#00dfd8] bg-[#18181b] px-1.5 py-0.5 rounded font-mono text-xs">localStorage</code> to remember your personal UI preferences across visits:
+        </p>
+        <ul class="list-disc pl-6 space-y-1 text-[14px]">
+          <li>Board orientation (White vs. Black perspective)</li>
+          <li>Sound effects toggle (move audio enabled/disabled)</li>
+          <li>Selected engine depth preferences or multi-PV line configurations</li>
+        </ul>
+        <p class="text-[14px]">
+          These values are stored purely on your local machine and are never transmitted to our backend. You can reset or clear these settings at any time by clearing your web browser cookies and site storage.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 5. Third-Party Services -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">05.</span> Third-Party Services & External Content
+        </h2>
+        <p>
+          Our website may link to third-party platforms, such as open-source code repositories (GitHub), chess governing bodies (FIDE), or external documentation. We are not responsible for the privacy practices, content, or terms of third-party websites. We encourage you to review the privacy policies of any external destination you visit.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 6. Children's Privacy -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">06.</span> Children's Privacy (COPPA Compliance)
+        </h2>
+        <p>
+          Next Move Chess is an educational and utility chess platform suitable for general audiences. We do not knowingly collect personal identifiable information from children under the age of 13 (or under 16 in certain jurisdictions). If you believe that a child has provided us with personal contact data, please contact us immediately so that we can promptly remove it.
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 7. Your Data Rights (GDPR & CCPA) -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">07.</span> User Rights (GDPR / CCPA / CPRA)
+        </h2>
+        <p>
+          Depending on your location, you may have rights under applicable privacy regulations (such as the European Union General Data Protection Regulation or the California Consumer Privacy Act), including:
+        </p>
+        <ul class="list-disc pl-6 space-y-1 text-[14px]">
+          <li>The right to know what personal data we hold about you (e.g. past support emails).</li>
+          <li>The right to request the deletion or correction of your communications.</li>
+          <li>The right to opt-out of data processing (noting that we do not sell or monetize personal data).</li>
+        </ul>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 8. Updates to Policy -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">08.</span> Changes to This Privacy Policy
+        </h2>
+        <p>
+          We may update this Privacy Policy periodically to reflect technological improvements, legal changes, or enhancements to Next Move Chess. Any revisions will be posted directly to this page with an updated "Effective Date".
+        </p>
+      </section>
+
+      <hr class="border-[#27272a]" />
+
+      <!-- 9. Contact Us -->
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-[#f4f4f5] flex items-center gap-2">
+          <span class="text-[#0070f3] font-mono text-sm">09.</span> Contact Us
+        </h2>
+        <p>
+          If you have any questions, concerns, or requests regarding this Privacy Policy or our data protection measures, please contact our team via our <a href="/contact" class="text-[#00dfd8] hover:underline">Contact Page</a> or by writing to <span class="font-mono text-[#f4f4f5]">support@nextmovechesss.com</span>.
+        </p>
+      </section>
+    </Card>
+  </div>
+</BaseLayout>

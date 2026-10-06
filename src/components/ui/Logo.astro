@@ -1,0 +1,104 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  showText?: boolean;
+  class?: string;
+}
+
+const {
+  size = 'md',
+  showText = true,
+  class: className = '',
+} = Astro.props;
+
+const dimensions = {
+  sm: {
+    icon: 'w-7 h-7',
+    svg: 'w-4 h-4',
+    text: 'text-[14px]',
+    sub: 'text-[9px]',
+    gap: 'gap-2',
+  },
+  md: {
+    icon: 'w-8 h-8',
+    svg: 'w-5 h-5',
+    text: 'text-[15px]',
+    sub: 'text-[10px]',
+    gap: 'gap-2.5',
+  },
+  lg: {
+    icon: 'w-10 h-10',
+    svg: 'w-6 h-6',
+    text: 'text-[18px]',
+    sub: 'text-[11px]',
+    gap: 'gap-3',
+  },
+}[size];
+---
+
+<div class={`flex items-center ${dimensions.gap} ${className} group`}>
+  <!-- Logo Icon Mark -->
+  <div class={`relative ${dimensions.icon} rounded-[9px] bg-gradient-to-br from-[#00f2fe] via-[#0070f3] to-[#7928ca] p-[1.5px] shadow-[0_0_16px_rgba(0,242,254,0.35)] group-hover:shadow-[0_0_22px_rgba(0,242,254,0.55)] group-hover:scale-105 transition-all duration-300 flex-shrink-0`}>
+    <div class="w-full h-full rounded-[7.5px] bg-[#0c0d14] flex items-center justify-center relative overflow-hidden">
+      <!-- Subtle internal ambient glow -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-[#0070f3]/25 via-transparent to-[#00f2fe]/20 pointer-events-none"></div>
+      
+      <!-- Modern Chess Knight + Next Move Vector SVG -->
+      <svg
+        class={`${dimensions.svg} text-[#00f2fe] drop-shadow-[0_0_6px_rgba(0,242,254,0.6)] relative z-10`}
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="nmc-grad" x1="4" y1="4" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#00f2fe" />
+            <stop offset="50%" stop-color="#38bdf8" />
+            <stop offset="100%" stop-color="#a855f7" />
+          </linearGradient>
+          <linearGradient id="nmc-arrow" x1="12" y1="12" x2="24" y2="20" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#38bdf8" />
+          </linearGradient>
+        </defs>
+
+        <!-- Knight Body & Mane Silhouette -->
+        <path
+          d="M7 26.5C7 25.5 8 24.5 9.5 24.5H22.5C24 24.5 25 25.5 25 26.5V27C25 27.5 24.5 28 24 28H8C7.5 28 7 27.5 7 27V26.5Z"
+          fill="url(#nmc-grad)"
+        />
+        <path
+          d="M8.5 23.5L9.8 17.2C10.1 15.6 9.8 13.9 9.1 12.5L8.5 11.2C8.2 10.5 8.4 9.7 9 9.2L12.8 6C13.6 5.3 14.7 5.4 15.3 6.2L16.2 7.4C16.6 8 17.3 8.3 18 8.2L21.4 7.7C22.4 7.5 23.3 8.2 23.5 9.2L23.8 11C24 12.1 23.5 13.1 22.5 13.7L19.5 15.5L22.5 23.5H8.5Z"
+          fill="url(#nmc-grad)"
+          opacity="0.95"
+        />
+
+        <!-- Forward Move Arrow / Tactical Vector (embedded in chest) -->
+        <path
+          d="M13 14L17 17.5L13 21"
+          stroke="url(#nmc-arrow)"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        
+        <!-- Knight Eye (Precision Focus Diamond) -->
+        <circle cx="18" cy="10.5" r="1.2" fill="#ffffff" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Brand Typography -->
+  {showText && (
+    <div class="flex flex-col select-none">
+      <div class="flex items-center gap-1.5">
+        <span class={`${dimensions.text} font-bold tracking-tight text-white`}>
+          Next Move
+        </span>
+        <span class={`${dimensions.text} font-bold tracking-tight bg-gradient-to-r from-[#00f2fe] via-[#38bdf8] to-[#a855f7] bg-clip-text text-transparent`}>
+          Chess
+        </span>
+      </div>
+    </div>
+  )}
+</div>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import Badge from '../components/ui/Badge.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  readTime: string;
+  author: string;
+}
+
+const { title, description, pubDate, category, readTime, author } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(pubDate);
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  datePublished: pubDate.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Next Move Chess',
+    url: 'https://nextmovechesss.com',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://nextmovechesss.com/learn`,
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  activePath="/learn"
+  ogType="article"
+  schema={articleSchema}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: 'Learn & Strategy', href: '/learn' },
+        { name: title },
+      ]}
+    />
+
+    <!-- Header -->
+    <header class="space-y-4 pb-8 border-b border-[#27272a]">
+      <div class="flex flex-wrap items-center gap-2.5">
+        <Badge text={category} variant="brand" />
+        <span class="text-[12px] font-mono text-[#71717a]">•</span>
+        <span class="text-[12px] font-mono text-[#a1a1aa]">{readTime}</span>
+        <span class="text-[12px] font-mono text-[#71717a]">•</span>
+        <span class="text-[12px] font-mono text-[#71717a]">{formattedDate}</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-[1.15]">
+        {title}
+      </h1>
+
+      <p class="text-lg text-[#a1a1aa] leading-relaxed">
+        {description}
+      </p>
+
+      <div class="flex items-center gap-3 pt-2">
+        <div class="w-8 h-8 rounded-full bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[12px] font-mono font-medium text-[#00dfd8]">
+          NM
+        </div>
+        <div class="text-[13px]">
+          <span class="text-[#f4f4f5] font-medium">{author}</span>
+          <span class="text-[#71717a] ml-1">· Verified Chess Strategy</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Markdown Content Body -->
+    <div class="py-10 prose prose-invert prose-zinc max-w-none 
+      prose-headings:text-[#f4f4f5] prose-headings:font-bold prose-headings:tracking-tight
+      prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:border-b prose-h2:border-[#27272a] prose-h2:pb-2
+      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+      prose-p:text-[#a1a1aa] prose-p:leading-relaxed prose-p:text-[16px]
+      prose-strong:text-[#f4f4f5] prose-strong:font-semibold
+      prose-code:text-[#00dfd8] prose-code:bg-[#18181b] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-[14px]
+      prose-blockquote:border-l-[#0070f3] prose-blockquote:bg-[#121212] prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-[8px] prose-blockquote:text-[#d4d4d8]
+      prose-ul:text-[#a1a1aa] prose-ol:text-[#a1a1aa] prose-li:my-1
+      prose-a:text-[#0070f3] hover:prose-a:text-[#00dfd8] prose-a:no-underline hover:prose-a:underline"
+    >
+      <slot />
+    </div>
+
+    <!-- Article Bottom Call to Action Card -->
+    <div class="mt-12 pt-8 border-t border-[#27272a]">
+      <Card class="bg-gradient-to-br from-[#121212] to-[#18181b] p-8 border-[#27272a] relative overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#0070f3]/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-lg">
+            <Badge text="Interactive Tool" variant="brand" />
+            <h3 class="text-xl font-bold text-[#f4f4f5] tracking-tight">
+              Test This Position with Next Move Chess
+            </h3>
+            <p class="text-[14px] text-[#a1a1aa]">
+              Set up your board, run real-time engine evaluation, and spot the best candidate moves in seconds.
+            </p>
+          </div>
+          <Button href="/chess-next-move" variant="primary" class="shrink-0">
+            Launch Chess Tool →
+          </Button>
+        </div>
+      </Card>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,116 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+
+export const homeFaqs = [
+  {
+    q: 'How do I find the best next move in chess?',
+    a: 'To find the best next move in chess, set up your position on Next Move Chess by dragging pieces or pasting a FEN/PGN code. The Stockfish NNUE engine calculates millions of possibilities per second to display the optimal candidate moves and numerical evaluations.',
+  },
+  {
+    q: 'What is the best opening move in chess?',
+    a: '1.e4 (King’s Pawn) and 1.d4 (Queen’s Pawn) are statistically and strategically the best opening moves in chess for White. They stake immediate central control and facilitate rapid piece development. 1.c4 (English) and 1.Nf3 (Réti) are also elite grandmaster choices.',
+  },
+  {
+    q: 'What is the best move in my chess position?',
+    a: 'The best move in your position depends on tactical factors (checks, captures, threats) and positional goals (king safety, piece activity). Input your position into Next Move Chess to receive the mathematically strongest move computed by our Stockfish chess AI.',
+  },
+  {
+    q: 'What’s my next chess move?',
+    a: 'Find your next chess move instantly by pasting your FEN string or playing moves on the analysis board. Next Move Chess highlights the highest-rated continuation with dynamic visual arrows and deep line evaluations.',
+  },
+  {
+    q: 'What is a chess engine?',
+    a: 'A chess engine is a specialized computer program that calculates chess moves and evaluates positions using minimax search trees, alpha-beta pruning, and neural evaluation networks (NNUE).',
+  },
+  {
+    q: 'What is the strongest chess engine?',
+    a: 'Stockfish (specifically Stockfish NNUE) is globally recognized as the strongest chess engine in the world, with an estimated Elo exceeding 3500+ and dominant victories in top computer chess championships.',
+  },
+  {
+    q: 'What is the best chess move in any position?',
+    a: 'The best chess move is the move that maximizes your winning chances or preserves optimal strategic balance, identified through deep calculation of all candidate responses.',
+  },
+  {
+    q: 'How does a chess engine find the best move?',
+    a: 'A chess engine generates a tree of possible future moves, prunes sub-optimal branches using alpha-beta search, and evaluates terminal positions with neural networks to assign a centipawn score to each option.',
+  },
+  {
+    q: 'Is this chess move calculator free to use?',
+    a: 'Yes, Next Move Chess is 100% free with no registration, subscriptions, or paywalls required.',
+  },
+  {
+    q: 'What is the best chess move calculator?',
+    a: 'Next Move Chess is the best chess move calculator online, offering Stockfish NNUE neural engine analysis, instant FEN/PGN import, mobile optimization, and zero ads.',
+  },
+  {
+    q: 'Is using a chess AI to find moves cheating?',
+    a: 'Using a chess AI during a live game against another human player is considered cheating and violates fair play rules. However, using chess AI for post-game analysis, study, and training is completely fair and highly encouraged.',
+  },
+  {
+    q: 'Is this a chess AI?',
+    a: 'Yes, Next Move Chess is powered by Stockfish NNUE, a state-of-the-art neural network chess AI trained on billions of positions to deliver grandmaster-level positional evaluations.',
+  },
+  {
+    q: 'What is the best free chess AI?',
+    a: 'Stockfish NNUE is the world’s best free and open-source chess AI, and Next Move Chess lets you run it directly in your browser with zero setup.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+---
+
+<section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0c0c0e]">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14 space-y-3">
+      <Badge text="Got Questions?" variant="mono" />
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
+        Frequently Asked Questions
+      </h2>
+      <p class="text-[15px] text-[#a1a1aa]">
+        Everything you need to know about chess analysis, AI calculation, and engine evaluations.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {homeFaqs.map((faq, index) => (
+        <Card class="p-5 sm:p-6">
+          <details class="group cursor-pointer">
+            <summary class="flex items-center justify-between font-semibold text-[16px] text-[#f4f4f5] list-none">
+              <span>{faq.q}</span>
+              <span class="w-6 h-6 rounded-full bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a1a1aa] group-open:rotate-180 transition-transform text-xs shrink-0 ml-4">
+                ▼
+              </span>
+            </summary>
+            <p class="mt-3 text-[14px] text-[#a1a1aa] leading-relaxed pt-3 border-t border-[#27272a]/60">
+              {faq.a}
+            </p>
+          </details>
+        </Card>
+      ))}
+    </div>
+
+    <div class="mt-10 text-center">
+      <a
+        href="/faq"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-[#00dfd8] hover:text-[#00dfd8]/80 transition-colors"
+      >
+        View All Questions & Guides in FAQ Center →
+      </a>
+    </div>
+  </div>
+
+  <!-- FAQ JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

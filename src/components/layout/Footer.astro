@@ -1,0 +1,134 @@
+---
+import Logo from '../ui/Logo.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="w-full bg-[#0a0a0a] border-t border-[#27272a] mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
+      <!-- Brand & Summary -->
+      <div class="md:col-span-1 space-y-4">
+        <a href="/" class="focus:outline-none" aria-label="Next Move Chess Home">
+          <Logo size="md" />
+        </a>
+        <p class="text-[13px] text-[#a1a1aa] leading-relaxed">
+          High-performance chess move calculator and tactical position evaluation powered by modern engine search.
+        </p>
+        <div class="text-[11px] font-mono text-[#71717a]">
+          Domain: nextmovechesss.com
+        </div>
+      </div>
+
+      <!-- Core Engine Tools -->
+      <div class="space-y-3">
+        <h4 class="text-[12px] font-mono font-medium uppercase tracking-wider text-[#a1a1aa]">
+          Chess Engine
+        </h4>
+        <ul class="space-y-2 text-[13px]">
+          <li>
+            <a href="/chess-next-move" class="text-[#f4f4f5] hover:text-[#00dfd8] transition-colors font-medium">
+              Next Move Chess Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/chess-next-move" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Chess Analysis Board
+            </a>
+          </li>
+          <li>
+            <a href="/how-it-works" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Stockfish Engine Architecture
+            </a>
+          </li>
+          <li>
+            <a href="/chess-next-move" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Best Chess Move Calculator
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Strategy & Education -->
+      <div class="space-y-3">
+        <h4 class="text-[12px] font-mono font-medium uppercase tracking-wider text-[#a1a1aa]">
+          Learn & Guides
+        </h4>
+        <ul class="space-y-2 text-[13px]">
+          <li>
+            <a href="/learn/how-to-find-the-best-move-in-chess" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Finding the Best Move
+            </a>
+          </li>
+          <li>
+            <a href="/learn/chess-move-analyzer" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Position Evaluation Guide
+            </a>
+          </li>
+          <li>
+            <a href="/learn/how-chess-engines-work" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              How Chess Engines Work
+            </a>
+          </li>
+          <li>
+            <a href="/learn/chess-tactics-guide" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Essential Tactics Guide
+            </a>
+          </li>
+          <li>
+            <a href="/learn/chess-opening-principles" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              5 Golden Opening Rules
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Platform & Legal -->
+      <div class="space-y-3">
+        <h4 class="text-[12px] font-mono font-medium uppercase tracking-wider text-[#a1a1aa]">
+          Product & Legal
+        </h4>
+        <ul class="space-y-2 text-[13px]">
+          <li>
+            <a href="/about" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              About Next Move Chess
+            </a>
+          </li>
+          <li>
+            <a href="/faq" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Frequently Asked Questions
+            </a>
+          </li>
+          <li>
+            <a href="/contact" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Support & Contact
+            </a>
+          </li>
+          <li>
+            <a href="/privacy" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a href="/terms" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              Terms of Service
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-12 pt-6 border-t border-[#27272a] flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#71717a]">
+      <div>
+        &copy; {year} Next Move Chess. All rights reserved.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="/privacy" class="hover:text-[#a1a1aa] transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-[#a1a1aa] transition-colors">Terms</a>
+        <a href="/contact" class="hover:text-[#a1a1aa] transition-colors">Contact</a>
+        <span class="font-mono text-[11px] text-[#00dfd8]">nextmovechesss.com</span>
+      </div>
+    </div>
+  </div>
+</footer>

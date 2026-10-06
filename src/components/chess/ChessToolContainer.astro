@@ -1,0 +1,30 @@
+---
+import ChessEngineTool from '../ChessEngineTool';
+
+interface Props {
+  initialFen?: string;
+  isEmbedded?: boolean;
+}
+
+const {
+  initialFen,
+  isEmbedded = false,
+} = Astro.props;
+---
+
+<div class="w-full min-h-[620px] transition-all">
+  <ChessEngineTool client:only="react" initialFen={initialFen} isEmbedded={isEmbedded}>
+    <div slot="fallback" class="w-full max-w-5xl mx-auto min-h-[580px] bg-[#0c0c0e] border border-[#27272a] rounded-[16px] p-6 sm:p-8 flex flex-col items-center justify-center space-y-4">
+      <div class="w-14 h-14 rounded-2xl bg-[#141419] border border-[#27272a] flex items-center justify-center text-[#00dfd8] shadow-inner">
+        <svg class="animate-spin h-7 w-7 text-[#00dfd8]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+      </div>
+      <div class="text-center space-y-1">
+        <div class="text-[16px] font-bold text-[#f4f4f5]">Loading Next Move Chess Calculator...</div>
+        <div class="text-[13px] text-[#71717a] font-mono">Initializing Stockfish NNUE Engine & Interactive Board</div>
+      </div>
+    </div>
+  </ChessEngineTool>
+</div>

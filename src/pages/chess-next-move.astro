@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChessToolContainer from '../components/chess/ChessToolContainer.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Chess Next Move Calculator - Best Next Move & Online Engine Analysis"
+  description="Free chess next move calculator powered by Stockfish chess engine online. Set up any position on the interactive chess analysis board or paste FEN to find the best candidate chess moves."
+  keywords="chess next move, chess ai, next chess move, chess next move calculator, next move chess calculator, chess analysis board, stockfish chess engine, chess move calculator, best chess move calculator, chess game analyzer"
+  activePath="/chess-next-move"
+  isToolPage={true}
+>
+  <div class="w-full flex-1 flex flex-col justify-start py-4 sm:py-6">
+    <!-- Main Tool Container (Prototype integration target) -->
+    <ChessToolContainer />
+
+    <!-- Helpful Instructions & FAQs Accordion below tool -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 w-full space-y-8">
+      
+      <!-- 3-Column Tool Guide -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card padding="md" class="space-y-2">
+          <div class="w-8 h-8 rounded-[6px] bg-[#18181b] border border-[#27272a] flex items-center justify-center font-mono font-bold text-[#00dfd8]">
+            1
+          </div>
+          <h3 class="text-[15px] font-bold text-[#f4f4f5]">Drag or Click Pieces</h3>
+          <p class="text-[13px] text-[#a1a1aa] leading-relaxed">
+            Freely position pieces on any square. Use the palette strip to add extra pieces, erase squares, or flip board perspective.
+          </p>
+        </Card>
+
+        <Card padding="md" class="space-y-2">
+          <div class="w-8 h-8 rounded-[6px] bg-[#18181b] border border-[#27272a] flex items-center justify-center font-mono font-bold text-[#00dfd8]">
+            2
+          </div>
+          <h3 class="text-[15px] font-bold text-[#f4f4f5]">Import FEN / PGN</h3>
+          <p class="text-[13px] text-[#a1a1aa] leading-relaxed">
+            Copy the FEN string directly from your Chess.com or Lichess match into the input field to evaluate sharp tournament positions.
+          </p>
+        </Card>
+
+        <Card padding="md" class="space-y-2">
+          <div class="w-8 h-8 rounded-[6px] bg-[#18181b] border border-[#27272a] flex items-center justify-center font-mono font-bold text-[#00dfd8]">
+            3
+          </div>
+          <h3 class="text-[15px] font-bold text-[#f4f4f5]">Deep Engine Analysis</h3>
+          <p class="text-[13px] text-[#a1a1aa] leading-relaxed">
+            Hit <strong>Calculate Next Move</strong> to evaluate millions of nodes with Stockfish NNUE and view tactical continuation lines.
+          </p>
+        </Card>
+      </div>
+
+      <!-- Quick Educational Banner -->
+      <Card class="bg-gradient-to-r from-[#121212] via-[#16161a] to-[#121212] p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-[#27272a]">
+        <div class="space-y-1 text-center sm:text-left">
+          <h4 class="text-[15px] font-bold text-[#f4f4f5]">Want to improve your calculation skills?</h4>
+          <p class="text-[13px] text-[#a1a1aa]">Read our Grandmaster guide on step-by-step candidate move calculation.</p>
+        </div>
+        <Button href="/learn/how-to-find-the-best-move-in-chess" variant="secondary" class="shrink-0">
+          Read Guide →
+        </Button>
+      </Card>
+    </div>
+  </div>
+</BaseLayout>

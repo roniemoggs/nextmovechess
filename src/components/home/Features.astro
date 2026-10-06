@@ -1,0 +1,70 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+
+const features = [
+  {
+    title: 'Stockfish NNUE Neural Engine',
+    desc: 'Runs high-depth neural evaluation natively in your browser via WebAssembly for lightning-fast answers.',
+    badge: 'Engine',
+  },
+  {
+    title: 'Mobile-First Tactile Controls',
+    desc: 'Engineered specifically for smartphone screens with large touch targets, thumb docks, and swipeable controls.',
+    badge: 'Mobile UX',
+  },
+  {
+    title: 'Live Centipawn Evaluation Bar',
+    desc: 'Instant visual meter shows who is winning and highlights sudden advantage shifts or blunder refutations.',
+    badge: 'Evaluation',
+  },
+  {
+    title: 'Multi-Line Candidate Suggestions',
+    desc: 'Compare the top 3 alternative variations side-by-side to understand why intuitive moves fail.',
+    badge: 'Multi-PV',
+  },
+  {
+    title: 'Instant FEN & PGN Sync',
+    desc: 'Copy and paste position strings with one tap from Chess.com, Lichess, or digital game records.',
+    badge: 'Portability',
+  },
+  {
+    title: 'Zero Ads & Zero Distractions',
+    desc: 'Clean, professional workspace with no disruptive popups, third-party banners, or anti-adblock modals.',
+    badge: 'Clean SaaS',
+  },
+];
+---
+
+<section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0c0c0e]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+      <Badge text="Built for Speed & Accuracy" variant="brand" />
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
+        Engineered for Modern Chess Players
+      </h2>
+      <p class="text-[15px] text-[#a1a1aa]">
+        Everything you need to analyze sharp tactical positions and improve your calculation depth.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((feature) => (
+        <Card hoverEffect={true} class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-mono uppercase tracking-wider text-[#00dfd8] bg-[#00dfd8]/10 px-2 py-0.5 rounded border border-[#00dfd8]/20">
+              {feature.badge}
+            </span>
+            <div class="w-2 h-2 rounded-full bg-[#27272a]"></div>
+          </div>
+          <h3 class="text-lg font-bold text-[#f4f4f5] tracking-tight">
+            {feature.title}
+          </h3>
+          <p class="text-[14px] text-[#a1a1aa] leading-relaxed">
+            {feature.desc}
+          </p>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

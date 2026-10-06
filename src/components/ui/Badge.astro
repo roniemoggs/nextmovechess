@@ -1,0 +1,22 @@
+---
+interface Props {
+  text: string;
+  variant?: 'mono' | 'brand' | 'success';
+  class?: string;
+}
+
+const { text, variant = 'mono', class: className = '' } = Astro.props;
+
+const variantStyles = {
+  mono: 'bg-[#18181b] text-[#a1a1aa] border-[#27272a]',
+  brand: 'bg-[#0070f3]/10 text-[#00dfd8] border-[#0070f3]/30',
+  success: 'bg-[#10b981]/10 text-[#10b981] border-[#10b981]/30',
+};
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono font-medium uppercase tracking-wider rounded-full border ${variantStyles[variant]} ${className}`}
+>
+  <slot name="icon" />
+  {text}
+</span>

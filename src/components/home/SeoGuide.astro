@@ -1,0 +1,451 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+import Button from '../ui/Button.astro';
+---
+
+<section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0c] relative">
+  <!-- Subtle ambient glow -->
+  <div class="absolute top-12 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-b from-[#0070f3]/10 via-[#00dfd8]/5 to-transparent blur-[140px] pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+    
+    <!-- Top Section Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-4">
+      <Badge text="Complete Calculation & Analysis Guide" variant="brand" />
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
+        Next Move Chess: The Ultimate Online Chess Move Calculator & Engine
+      </h2>
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+        Discover how modern grandmaster calculation, neural network evaluations, and interactive board diagnostics help you calculate the strongest candidate moves in any chess position.
+      </p>
+    </div>
+
+    <!-- Chapter 1: Introduction to Next Move Chess -->
+    <article class="space-y-6 text-[#d4d4d8] leading-relaxed text-[15px] sm:text-[16px]">
+      <Card class="p-6 sm:p-10 space-y-5 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#0070f3]/15 border border-[#0070f3]/30 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-sm">
+            01
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Next Move Chess — The Modern Next Move Chess Calculator
+          </h3>
+        </div>
+
+        <p>
+          Every chess game is decided by a series of critical decisions. When the position reaches a boiling point, finding the strongest <strong class="text-[#f4f4f5]">next chess move</strong> separates victory from defeat. Whether you are untangling a cramped middlegame, defending against an aggressive kingside storm, or converting a subtle endgame advantage, understanding your best <strong class="text-[#00dfd8]">chess next move</strong> requires deep strategic vision and flawless calculation.
+        </p>
+
+        <p>
+          <strong class="text-[#f4f4f5]">Next Move Chess</strong> was engineered from the ground up to serve as the web’s most responsive and accessible <strong class="text-[#f4f4f5]">next move chess calculator</strong>. Unlike sluggish desktop software or ad-bloated legacy platforms, Next Move Chess runs directly in your browser. Powered by client-side neural technology, our <strong class="text-[#f4f4f5]">chess move calculator</strong> evaluates millions of tactical possibilities in fractions of a second, highlighting concrete tactical refutations, positional imbalances, and winning continuation lines.
+        </p>
+
+        <p>
+          Whether you need a rapid check on a recent blitz blunder, a comprehensive study of complex theoretical lines, or an interactive <strong class="text-[#f4f4f5]">chess analysis board</strong> to explore "what if" scenarios, our suite gives you immediate grandmaster-caliber feedback with zero paywalls, zero registrations, and zero advertising interruptions.
+        </p>
+      </Card>
+
+      <!-- Chapter 2: Stockfish Engine Online -->
+      <Card class="p-6 sm:p-10 space-y-5 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#00dfd8]/15 border border-[#00dfd8]/30 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-sm">
+            02
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Powered by the Stockfish Chess Engine: Deep NNUE Evaluation Online
+          </h3>
+        </div>
+
+        <p>
+          At the core of Next Move Chess is the renowned <strong class="text-[#f4f4f5]">Stockfish chess engine</strong>, recognized globally as the undisputed pinnacle of chess computing. Traditional chess engines relied on hand-crafted evaluation functions (HCE) composed of thousands of human-coded heuristics—such as isolated pawns, bishop pairs, and open rooks. While effective, traditional algorithms frequently suffered from evaluation blind spots in dynamic, unbalanced positions.
+        </p>
+
+        <p>
+          By leveraging the latest NNUE (Efficiently Updatable Neural Network) architecture, our modern <strong class="text-[#00dfd8]">chess AI</strong> and <strong class="text-[#00dfd8]">chess engine online</strong> evaluates positions through a trained neural network that captures deep positional nuance. Running a modern <strong class="text-[#f4f4f5]">chess engine online</strong> in your browser combines the raw calculation speed of alpha-beta tree search with human-like intuitive positional judgment. As the <strong class="text-[#f4f4f5]">best chess move calculator</strong> and cutting-edge <strong class="text-[#f4f4f5]">chess AI</strong> tool available, it excels at evaluating king safety corridors, compensation for sacrificed material, and hyper-dynamic piece activity that older engines routinely misjudged.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-1.5">
+            <div class="text-[#00dfd8] font-mono text-sm font-semibold">Alpha-Beta Minimax</div>
+            <p class="text-xs text-[#a1a1aa] leading-relaxed">
+              Prunes millions of suboptimal move variations instantly, concentrating calculation power exclusively on critical forcing lines.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-1.5">
+            <div class="text-[#00dfd8] font-mono text-sm font-semibold">Client-Side WebAssembly</div>
+            <p class="text-xs text-[#a1a1aa] leading-relaxed">
+              Executes high-depth multi-threaded search directly on your device CPU with zero server latency or network lag.
+            </p>
+          </div>
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-1.5">
+            <div class="text-[#00dfd8] font-mono text-sm font-semibold">Centipawn Precision</div>
+            <p class="text-xs text-[#a1a1aa] leading-relaxed">
+              Delivers micro-accurate numerical evaluations where 100 centipawns represent the strategic value of a single pawn advantage.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          Because our <strong class="text-[#f4f4f5]">chess engine</strong> runs locally using WebAssembly (WASM), your positions remain 100% private. Your game analyses are never uploaded to remote servers, giving you unlimited depth and instant responsiveness on both desktop computers and mobile devices.
+        </p>
+      </Card>
+
+      <!-- Chapter 3: Finding The Next Chess Move & Calculation Methodology -->
+      <Card class="p-6 sm:p-10 space-y-5 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#7928ca]/15 border border-[#7928ca]/30 text-[#d480ff] flex items-center justify-center font-mono font-bold text-sm">
+            03
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            How to Calculate the Next Chess Move: Candidate Moves & Tactics
+          </h3>
+        </div>
+
+        <p>
+          One of the greatest hurdles for advancing chess players is overcoming "tunnel vision"—fixating on an attractive first move without investigating superior alternatives or identifying your opponent’s tactical counter-punches. When utilizing our <strong class="text-[#f4f4f5]">chess next move calculator</strong>, you cultivate the disciplined thinking process practiced by Grandmasters.
+        </p>
+
+        <p>
+          To find the best <strong class="text-[#00dfd8]">chess moves</strong> in any complex position, apply the classic <strong class="text-[#f4f4f5]">CCT Method (Checks, Captures, Threats)</strong>:
+        </p>
+
+        <ul class="space-y-3 pl-2 sm:pl-4">
+          <li class="flex items-start gap-3">
+            <span class="text-[#00dfd8] font-bold mt-0.5">•</span>
+            <div>
+              <strong class="text-[#f4f4f5]">1. Forcing Checks:</strong> Examine every check available on the board, no matter how paradoxical or sacrificial it appears. Checks dramatically reduce the opponent’s legal replies, making calculation predictable and decisive.
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#00dfd8] font-bold mt-0.5">•</span>
+            <div>
+              <strong class="text-[#f4f4f5]">2. Material Captures:</strong> Calculate every capture and pawn tension release. Identify hanging pieces, unprotected defenders, and exchange sacrifices that disrupt king cover.
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#00dfd8] font-bold mt-0.5">•</span>
+            <div>
+              <strong class="text-[#f4f4f5]">3. Direct Threats:</strong> Look for attacking moves that threaten immediate mate, trap a high-value piece, create unavoidable pins, or generate unstoppable pawn promotions.
+            </div>
+          </li>
+        </ul>
+
+        <p>
+          Our <strong class="text-[#f4f4f5]">best chess move calculator</strong> highlights the top candidate moves simultaneously with Multi-PV analysis. By comparing the evaluation of your first intuitive choice against the engine’s top choice, you immediately discover subtle tactical resources—such as quiet intermediate moves (zwischenzugs), deflection tactics, and clearing sacrifices—that elevate your calculation depth.
+        </p>
+      </Card>
+
+      <!-- Chapter 4: Best Opening Chess Moves -->
+      <Card class="p-6 sm:p-10 space-y-5 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#10b981]/15 border border-[#10b981]/30 text-[#10b981] flex items-center justify-center font-mono font-bold text-sm">
+            04
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Mastering the Opening Phase: Selecting the Best Opening Chess Moves
+          </h3>
+        </div>
+
+        <p>
+          The opening sets the strategic tone for the entire contest. Playing inaccurate <strong class="text-[#f4f4f5]">chess moves</strong> in the first ten turns can quickly result in passive piece coordination, compromised pawn structures, or sudden tactical disaster. Understanding the principles behind the <strong class="text-[#00dfd8]">best opening chess moves</strong> equips you with resilient positions from move one.
+        </p>
+
+        <p>
+          When analyzing opening positions on our <strong class="text-[#f4f4f5]">chess analysis board</strong>, the engine rigorously verifies classical opening principles:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-xl bg-[#141419] border border-[#27272a] space-y-2">
+            <h4 class="text-[#f4f4f5] font-semibold text-base">Key Opening Tenets</h4>
+            <ul class="text-sm text-[#a1a1aa] space-y-1.5 list-disc pl-4">
+              <li>Occupy and stake claims in the center squares (e4, d4, e5, d5).</li>
+              <li>Develop minor pieces rapidly (Knights before Bishops).</li>
+              <li>Castle early to safeguard the King and connect the Rooks.</li>
+              <li>Avoid moving the same piece multiple times without provocation.</li>
+              <li>Refrain from early Queen sorties that concede tempo to enemy pieces.</li>
+            </ul>
+          </div>
+
+          <div class="p-5 rounded-xl bg-[#141419] border border-[#27272a] space-y-2">
+            <h4 class="text-[#f4f4f5] font-semibold text-base">Top Theoretical Openings Evaluated</h4>
+            <ul class="text-sm text-[#a1a1aa] space-y-1.5 list-disc pl-4">
+              <li><strong class="text-[#f4f4f5]">Ruy Lopez (1.e4 e5 2.Nf3 Nc6 3.Bb5):</strong> The supreme test of classical open battle.</li>
+              <li><strong class="text-[#f4f4f5]">Sicilian Defense (1.e4 c5):</strong> Dynamic asymmetrical counter-punching for Black.</li>
+              <li><strong class="text-[#f4f4f5]">Queen's Gambit (1.d4 d5 2.c4):</strong> Strategic central pressure and wing diversion.</li>
+              <li><strong class="text-[#f4f4f5]">Italian Game (1.e4 e5 2.Nf3 Nc6 3.Bc4):</strong> Rapid piece development aiming at f7.</li>
+              <li><strong class="text-[#f4f4f5]">Caro-Kann & French:</strong> Rock-solid hyper-resilient pawn structures.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>
+          Using our <strong class="text-[#f4f4f5]">best chess move calculator</strong>, you can test tricky sideline gambits, refute aggressive offbeat moves, and verify the exact theoretical continuation recommended by top Grandmasters and engine databases.
+        </p>
+      </Card>
+
+      <!-- Chapter 5: Interactive Chess Analysis Board & FEN Workflow -->
+      <Card class="p-6 sm:p-10 space-y-5 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#f59e0b]/15 border border-[#f59e0b]/30 text-[#f59e0b] flex items-center justify-center font-mono font-bold text-sm">
+            05
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Interactive Chess Analysis Board: Drag-and-Drop & Instant FEN Sync
+          </h3>
+        </div>
+
+        <p>
+          Modern chess study demands agility. Players frequently switch between online games on platforms like Chess.com or Lichess, offline tournament scoresheets, and tactical puzzles in training books. Next Move Chess bridges this gap with an intuitive, hyper-responsive <strong class="text-[#00dfd8]">chess analysis board</strong> designed for seamless position loading.
+        </p>
+
+        <p>
+          With our built-in FEN (Forsyth-Edwards Notation) and PGN parser, you can transfer any game state with a single copy-paste command. FEN encodes piece locations, turn indicators, castling privileges, en passant target squares, and halfmove clocks into a compact string. Pasting this string into the <strong class="text-[#f4f4f5]">chess next move calculator</strong> immediately reconstructs the board state and initiates deep engine evaluation.
+        </p>
+
+        <p>
+          Prefer tactile board setup? Our custom piece palette allows you to freely place pieces on any square, clear unwanted pieces with an eraser toggle, flip the board perspective between White and Black, and adjust castling rights on the fly. Whether you are analyzing complex Queen endgames, testing checkmate patterns, or exploring historical brilliancies, our <strong class="text-[#f4f4f5]">chess game analyzer</strong> provides an uncompromisingly sleek sandbox.
+        </p>
+      </Card>
+
+      <!-- Chapter 6: Deep Diagnostics with a Modern Chess Game Analyzer -->
+      <Card class="p-6 sm:p-10 space-y-5 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#ec4899]/15 border border-[#ec4899]/30 text-[#ec4899] flex items-center justify-center font-mono font-bold text-sm">
+            06
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Unlocking Deep Positional Insight with a Modern Chess Game Analyzer
+          </h3>
+        </div>
+
+        <p>
+          Looking at a single engine score without understanding the underlying tactical justification does little to improve your playing strength. An authentic <strong class="text-[#f4f4f5]">chess game analyzer</strong> must demystify engine logic into actionable strategic concepts.
+        </p>
+
+        <p>
+          Next Move Chess features a dynamic real-time evaluation bar that graphically communicates winning probabilities. A score of <code class="text-[#00dfd8] bg-[#18181b] px-1.5 py-0.5 rounded font-mono">+0.30</code> denotes approximate equality with slight White initiative, while <code class="text-[#00dfd8] bg-[#18181b] px-1.5 py-0.5 rounded font-mono">+2.50</code> signals a winning positional or material advantage. When checkmate is forced, the analyzer displays precise mating counts (such as <code class="text-[#10b981] bg-[#18181b] px-1.5 py-0.5 rounded font-mono">#4</code> for mate in 4 moves).
+        </p>
+
+        <p>
+          Furthermore, our multi-line engine display shows the top 3 alternative paths with interactive visual arrows directly on the board. You can see not only why the winning move triumphs, but why enticing blunders are swiftly punished by engine defense. This transforms raw number-crunching into deep chess comprehension.
+        </p>
+      </Card>
+
+      <!-- Chapter 7: Step-by-Step Calculation Protocol -->
+      <Card class="p-6 sm:p-10 space-y-6 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#00dfd8]/15 border border-[#00dfd8]/30 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-sm">
+            07
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            The 5-Step Protocol: Calculating Moves Like a Grandmaster
+          </h3>
+        </div>
+
+        <p>
+          To get the maximum educational value from our <strong class="text-[#f4f4f5]">next move chess calculator</strong>, follow this disciplined five-step routine before executing or verifying your moves:
+        </p>
+
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] flex flex-col sm:flex-row gap-4 items-start">
+            <span class="px-2.5 py-1 rounded bg-[#0070f3]/20 text-[#00dfd8] font-mono text-xs font-bold shrink-0">
+              STEP 1
+            </span>
+            <div class="space-y-1">
+              <h4 class="font-bold text-[#f4f4f5] text-sm sm:text-base">Assess Material & King Vulnerability</h4>
+              <p class="text-xs sm:text-sm text-[#a1a1aa]">
+                Count the pieces, inspect pawn structures, and evaluate whether either King is exposed to checks or mating nets.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] flex flex-col sm:flex-row gap-4 items-start">
+            <span class="px-2.5 py-1 rounded bg-[#0070f3]/20 text-[#00dfd8] font-mono text-xs font-bold shrink-0">
+              STEP 2
+            </span>
+            <div class="space-y-1">
+              <h4 class="font-bold text-[#f4f4f5] text-sm sm:text-base">Identify Opponent Threats (Prophylaxis)</h4>
+              <p class="text-xs sm:text-sm text-[#a1a1aa]">
+                Ask: "What would my opponent play if it were their turn right now?" Always neutralize active enemy threats before launching your own attack.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] flex flex-col sm:flex-row gap-4 items-start">
+            <span class="px-2.5 py-1 rounded bg-[#0070f3]/20 text-[#00dfd8] font-mono text-xs font-bold shrink-0">
+              STEP 3
+            </span>
+            <div class="space-y-1">
+              <h4 class="font-bold text-[#f4f4f5] text-sm sm:text-base">Generate 2 to 4 Candidate Moves</h4>
+              <p class="text-xs sm:text-sm text-[#a1a1aa]">
+                Broaden your perspective. Brainstorm several plausible candidate moves across different sectors of the board before diving deep into variations.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] flex flex-col sm:flex-row gap-4 items-start">
+            <span class="px-2.5 py-1 rounded bg-[#0070f3]/20 text-[#00dfd8] font-mono text-xs font-bold shrink-0">
+              STEP 4
+            </span>
+            <div class="space-y-1">
+              <h4 class="font-bold text-[#f4f4f5] text-sm sm:text-base">Calculate Concrete Forcing Variations</h4>
+              <p class="text-xs sm:text-sm text-[#a1a1aa]">
+                Follow forcing replies to the very end of the tactical sequence until the position reaches a quiet, stable resting point.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] flex flex-col sm:flex-row gap-4 items-start">
+            <span class="px-2.5 py-1 rounded bg-[#0070f3]/20 text-[#00dfd8] font-mono text-xs font-bold shrink-0">
+              STEP 5
+            </span>
+            <div class="space-y-1">
+              <h4 class="font-bold text-[#f4f4f5] text-sm sm:text-base">Verify with Next Move Chess Calculator</h4>
+              <p class="text-xs sm:text-sm text-[#a1a1aa]">
+                Run the position through our online tool to benchmark your human candidate moves against Stockfish’s top engine recommendation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Chapter 8: Feature Comparison Table -->
+      <Card class="p-6 sm:p-10 space-y-6 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#0070f3]/15 border border-[#0070f3]/30 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-sm">
+            08
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Comparison: Next Move Chess vs Outdated Legacy Calculators
+          </h3>
+        </div>
+
+        <p>
+          For over a decade, chess players seeking online move assistance had to contend with outdated web pages littered with video ads, intrusive trackers, and sluggish server queues. Here is how Next Move Chess elevates the standard for the modern chess community:
+        </p>
+
+        <div class="overflow-x-auto pt-2">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-[#27272a] bg-[#18181b]">
+                <th class="p-3.5 sm:p-4 text-[#f4f4f5] font-semibold text-xs sm:text-sm">Capability</th>
+                <th class="p-3.5 sm:p-4 text-[#71717a] font-mono text-xs uppercase">Legacy Calculators</th>
+                <th class="p-3.5 sm:p-4 text-[#00dfd8] font-mono text-xs uppercase bg-[#0070f3]/5 border-l border-[#27272a]">
+                  Next Move Chess
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#27272a]">
+              <tr class="hover:bg-[#151518] transition-colors">
+                <td class="p-3.5 sm:p-4 font-semibold text-[#f4f4f5]">Calculation Engine</td>
+                <td class="p-3.5 sm:p-4 text-[#71717a]">Outdated Stockfish 8/10 HCE</td>
+                <td class="p-3.5 sm:p-4 text-[#00dfd8] font-medium bg-[#0070f3]/5 border-l border-[#27272a]">
+                  Stockfish 16+ NNUE Neural Network
+                </td>
+              </tr>
+              <tr class="hover:bg-[#151518] transition-colors">
+                <td class="p-3.5 sm:p-4 font-semibold text-[#f4f4f5]">Calculation Latency</td>
+                <td class="p-3.5 sm:p-4 text-[#71717a]">1.5s - 5.0s (server queues)</td>
+                <td class="p-3.5 sm:p-4 text-[#10b981] font-medium bg-[#0070f3]/5 border-l border-[#27272a]">
+                  Instant (&lt; 0.2s client WASM)
+                </td>
+              </tr>
+              <tr class="hover:bg-[#151518] transition-colors">
+                <td class="p-3.5 sm:p-4 font-semibold text-[#f4f4f5]">Mobile Ergonomics</td>
+                <td class="p-3.5 sm:p-4 text-[#71717a]">Broken desktop zoom layouts</td>
+                <td class="p-3.5 sm:p-4 text-[#00dfd8] font-medium bg-[#0070f3]/5 border-l border-[#27272a]">
+                  Tailored touch docks & thumb navigation
+                </td>
+              </tr>
+              <tr class="hover:bg-[#151518] transition-colors">
+                <td class="p-3.5 sm:p-4 font-semibold text-[#f4f4f5]">Privacy & Data Security</td>
+                <td class="p-3.5 sm:p-4 text-[#71717a]">Positions logged on remote servers</td>
+                <td class="p-3.5 sm:p-4 text-[#00dfd8] font-medium bg-[#0070f3]/5 border-l border-[#27272a]">
+                  100% Client-side local execution
+                </td>
+              </tr>
+              <tr class="hover:bg-[#151518] transition-colors">
+                <td class="p-3.5 sm:p-4 font-semibold text-[#f4f4f5]">Ad Experience</td>
+                <td class="p-3.5 sm:p-4 text-[#71717a]">Flashing banners & video popups</td>
+                <td class="p-3.5 sm:p-4 text-[#10b981] font-medium bg-[#0070f3]/5 border-l border-[#27272a]">
+                  Zero ads, clean dark workspace
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Card>
+
+      <!-- Chapter 9: Frequently Asked Questions on Move Calculation -->
+      <Card class="p-6 sm:p-10 space-y-6 bg-[#0e0e12] border-[#27272a]">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-lg bg-[#00dfd8]/15 border border-[#00dfd8]/30 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-sm">
+            09
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+            Frequently Asked Questions About Next Move Chess & Analysis
+          </h3>
+        </div>
+
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-2">
+            <h4 class="font-bold text-[#f4f4f5] text-base">
+              Can I use this chess next move calculator to analyze games from Chess.com and Lichess?
+            </h4>
+            <p class="text-sm text-[#a1a1aa] leading-relaxed">
+              Yes. You can export any completed or ongoing training game from Chess.com, Lichess, or digital chess notation software in FEN or PGN format. Paste the position string into the input bar above, and our engine will load the position instantly with all castling rights and en passant flags intact.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-2">
+            <h4 class="font-bold text-[#f4f4f5] text-base">
+              How does the Stockfish chess engine calculate candidate moves so quickly?
+            </h4>
+            <p class="text-sm text-[#a1a1aa] leading-relaxed">
+              Stockfish uses bitboards—64-bit binary integers representing squares—which allow CPU bitwise operators to compute legal move vectors and pins in single processor cycles. Combined with alpha-beta pruning and an efficient neural network (NNUE), the engine searches millions of nodes per second without lagging your browser.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-2">
+            <h4 class="font-bold text-[#f4f4f5] text-base">
+              What is the best way to use this tool for chess improvement?
+            </h4>
+            <p class="text-sm text-[#a1a1aa] leading-relaxed">
+              Rather than blindly checking the best move during casual games, use Next Move Chess for post-game retrospectives. Review critical moments, formulate your own candidate moves first, and then run the engine to discover whether your tactical instinct matches grandmaster evaluation.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#141419] border border-[#27272a] space-y-2">
+            <h4 class="font-bold text-[#f4f4f5] text-base">
+              Does Next Move Chess work on mobile smartphones and tablets?
+            </h4>
+            <p class="text-sm text-[#a1a1aa] leading-relaxed">
+              Absolutely. Next Move Chess is built with a responsive touch dock, large draggable piece targets, and tactile quick-action buttons designed for mobile screens. You can analyze games on iOS, iPadOS, Android, and desktop browsers with equal fidelity.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      <!-- Bottom Interactive Call to Action Banner -->
+      <div class="p-8 sm:p-10 rounded-2xl bg-gradient-to-r from-[#121212] via-[#16161f] to-[#121212] border border-[#27272a] text-center space-y-4">
+        <Badge text="Start Calculating" variant="brand" />
+        <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] tracking-tight">
+          Calculate Your Best Chess Next Move Now
+        </h3>
+        <p class="text-sm sm:text-base text-[#a1a1aa] max-w-xl mx-auto leading-relaxed">
+          Put theory into practice. Set up your current board or paste your game FEN above to discover the engine's strongest tactical continuation.
+        </p>
+        <div class="pt-2 flex flex-wrap items-center justify-center gap-4">
+          <Button href="/chess-next-move" variant="primary">
+            Launch Chess Tool →
+          </Button>
+          <Button href="/learn" variant="secondary">
+            Explore Strategy Guides
+          </Button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>

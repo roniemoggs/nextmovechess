@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mark-border-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="50%" stop-color="#0070f3" />
+      <stop offset="100%" stop-color="#7928ca" />
+    </linearGradient>
+    <linearGradient id="mark-knight-grad" x1="20" y1="20" x2="80" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="50%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+    <linearGradient id="mark-arrow-grad" x1="36" y1="36" x2="68" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <filter id="mark-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Glow Border -->
+  <rect x="2" y="2" width="96" height="96" rx="24" fill="url(#mark-border-grad)" />
+  <!-- Inner Background Badge -->
+  <rect x="5.5" y="5.5" width="89" height="89" rx="20.5" fill="#0b0c14" />
+  <circle cx="35" cy="30" r="30" fill="#00f2fe" opacity="0.18" />
+
+  <!-- Knight Figure & Forward Arrow -->
+  <g filter="url(#mark-glow)">
+    <!-- Base Plate -->
+    <path
+      d="M25 80C25 77 28 74 32 74H68C72 74 75 77 75 80V81C75 83 73 85 71 85H29C27 85 25 83 25 81V80Z"
+      fill="url(#mark-knight-grad)"
+    />
+    <!-- Knight Body Silhouette -->
+    <path
+      d="M30 71L33.8 52.2C34.8 47.5 34 42.7 31.6 38L30 35C28.7 32.5 29.2 30.2 31.2 28.5L41.6 19C44 16.9 47.1 17.4 49 19.8L51.9 23.8C53 25.2 55 26 56.9 25.6L66.6 24C69.7 23.4 72.5 25.6 72.9 28.8L73.8 33.9C74.3 37 73 40.1 69.9 42.1L61.3 47.9L70 71H30Z"
+      fill="url(#mark-knight-grad)"
+    />
+    <!-- Tactical Forward Vector Arrow (Next Move) -->
+    <path
+      d="M42.5 44L53.5 54.5L42.5 65"
+      stroke="url(#mark-arrow-grad)"
+      stroke-width="6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <!-- Focus Eye -->
+    <circle cx="56.8" cy="32.5" r="3.5" fill="#ffffff" />
+  </g>
+</svg>

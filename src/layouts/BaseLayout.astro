@@ -1,0 +1,165 @@
+---
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  activePath?: string;
+  canonical?: string;
+  isToolPage?: boolean;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  schema?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
+  robots?: string;
+}
+
+const DEFAULT_TITLE = 'Next Move Chess - Best Chess Move Calculator & Online Engine';
+const DEFAULT_DESCRIPTION = 'Calculate the best next move in any position with Next Move Chess. Powered by Stockfish chess engine online, interactive chess analysis board, FEN import, and master candidate move evaluations.';
+const DEFAULT_KEYWORDS = 'Next Move Chess, chess ai, next chess move, chess next move, chess engine, chess engine online, stockfish chess engine, next move chess calculator, chess next move calculator, chess analysis board, chess moves, best opening chess moves, chess move calculator, best chess move calculator, chess game analyzer, ai chess engine';
+const SITE_URL = 'https://nextmovechesss.com';
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
+const {
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  keywords = DEFAULT_KEYWORDS,
+  activePath = '/',
+  canonical = `${SITE_URL}${activePath === '/' ? '' : activePath}`,
+  isToolPage = false,
+  ogImage = DEFAULT_OG_IMAGE,
+  ogType = 'website',
+  schema,
+  noindex = false,
+  robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+} = Astro.props;
+
+const fullTitle = title.includes('Next Move Chess') ? title : `${title} | Next Move Chess`;
+const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+
+// Core Schema.org structured data
+const defaultWebsiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Next Move Chess',
+  alternateName: ['NextMoveChess', 'Next Move Chess Calculator', 'Next Chess Move', 'Next Move Chess AI', 'Chess AI'],
+  url: SITE_URL,
+  description: DEFAULT_DESCRIPTION,
+  inLanguage: 'en-US',
+};
+
+const defaultSoftwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Next Move Chess Calculator',
+  applicationCategory: 'GameApplication',
+  operatingSystem: 'All',
+  browserRequirements: 'Requires JavaScript and HTML5 support',
+  url: `${SITE_URL}/chess-next-move`,
+  description: 'Free online chess move calculator and analysis board powered by Stockfish NNUE chess AI engine.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  featureList: [
+    'Stockfish NNUE Chess Engine & Chess AI Online',
+    'Real-time Centipawn Evaluation Bar',
+    'Multi-PV Candidate Move Suggestions',
+    'Interactive Chess Analysis Board with Drag & Drop',
+    'Instant FEN and PGN Import',
+    'Best Opening Chess Moves Analysis',
+  ],
+};
+
+const structuredData = schema
+  ? (Array.isArray(schema) ? schema : [schema])
+  : [defaultWebsiteSchema, defaultSoftwareSchema];
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Next Move Chess" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="robots" content={robots} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Next Move Chess" />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:secure_url" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:alt" content="Next Move Chess - Best Chess Move Calculator & Online Engine" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+    <meta name="twitter:image:alt" content="Next Move Chess - Best Chess Move Calculator & Online Engine" />
+
+    <!-- Structured Data (JSON-LD) -->
+    {structuredData.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
+
+    <!-- Google Fonts: Inter & JetBrains Mono as crisp Geist fallbacks -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global Styles & Tailwind CSS v4 -->
+    <style is:global>
+      @import "../styles/global.css";
+    </style>
+  </head>
+  <body class="bg-[#0a0a0a] text-[#f4f4f5] min-h-screen flex flex-col selection:bg-[#0070f3] selection:text-white">
+    <Navbar activePath={activePath} />
+
+    <main class={`flex-1 flex flex-col ${isToolPage ? 'w-full' : ''}`}>
+      <slot />
+    </main>
+
+    {!isToolPage && <Footer />}
+    {isToolPage && (
+      <footer class="border-t border-[#27272a] bg-[#0a0a0a] py-4 px-4 text-center text-[12px] text-[#71717a]">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+          <span>&copy; {new Date().getFullYear()} Next Move Chess — High-Performance Position Calculator</span>
+          <div class="flex items-center gap-4">
+            <a href="/how-it-works" class="hover:text-[#f4f4f5] transition-colors">How it works</a>
+            <a href="/learn" class="hover:text-[#f4f4f5] transition-colors">Guides</a>
+            <a href="/faq" class="hover:text-[#f4f4f5] transition-colors">FAQ</a>
+          </div>
+        </div>
+      </footer>
+    )}
+  </body>
+</html>

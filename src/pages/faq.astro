@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+
+const allFaqs = [
+  {
+    category: 'Finding & Calculating Next Chess Moves',
+    items: [
+      {
+        q: 'How do I find the best next move in chess?',
+        a: 'To find the best next move in chess, you can use our free Next Move Chess calculator. Simply set up your board position by dragging pieces, paste a FEN or PGN string, or make moves on the interactive board. The integrated Stockfish NNUE engine analyzes millions of variations per second to display the optimal candidate moves and centipawn evaluations.',
+      },
+      {
+        q: 'What is the best move in my chess position?',
+        a: 'The best move in your specific chess position depends on tactical dynamics (checks, captures, and threats) and strategic principles (king safety, piece activity, and pawn structure). Enter your board into Next Move Chess, and our AI chess engine will compute the highest-evaluating continuation for your exact position.',
+      },
+      {
+        q: 'What’s my next chess move?',
+        a: 'You can discover your next chess move instantly by pasting your game FEN or playing the position on the Next Move Chess interactive board. The engine immediately highlights the top candidate moves and visualizes the best continuation arrows.',
+      },
+      {
+        q: 'What is the best chess move in any position?',
+        a: 'The best chess move in any position is the move that mathematically maximizes your winning probability or preserves dynamic balance. In tactical positions, it may be a decisive sacrifice or forcing checkmate; in quiet positions, it improves piece harmony and controls vital central squares.',
+      },
+      {
+        q: 'What is the best opening move in chess?',
+        a: 'The most popular and statistically successful opening moves in chess for White are 1.e4 (King’s Pawn) and 1.d4 (Queen’s Pawn), as both stake immediate claims in the center and open diagonals for bishops and the queen. Other top grandmaster opening moves include 1.c4 (English Opening) and 1.Nf3 (Réti Opening).',
+      },
+    ],
+  },
+  {
+    category: 'Chess Engines & Calculation Technology',
+    items: [
+      {
+        q: 'What is a chess engine?',
+        a: 'A chess engine is a specialized software program that analyzes chess positions, calculates millions of future move sequences using search algorithms (like minimax and alpha-beta pruning), and evaluates positional quality with numerical scores or neural networks.',
+      },
+      {
+        q: 'What is the strongest chess engine?',
+        a: 'Stockfish (specifically Stockfish NNUE) is widely acknowledged as the strongest chess engine in the world, with an estimated Elo rating exceeding 3500+ and numerous championships in the Top Chess Engine Championship (TCEC). Next Move Chess runs Stockfish directly in your browser.',
+      },
+      {
+        q: 'How does a chess engine find the best move?',
+        a: 'A chess engine finds the best move by generating a search tree of millions of possible move branches, pruning inferior variations via alpha-beta search, and evaluating the terminal positions using neural networks (NNUE). It then chooses the move with the highest evaluation score.',
+      },
+      {
+        q: 'What does the evaluation score (+1.5, -2.0, #3) mean?',
+        a: 'A positive score (+1.50) indicates White is leading by roughly 1.5 pawns in positional or material value. A negative score (-2.00) means Black has an advantage. A symbol like #4 represents a forced checkmate in 4 moves.',
+      },
+    ],
+  },
+  {
+    category: 'Chess AI & Fair Play',
+    items: [
+      {
+        q: 'Is this a chess AI?',
+        a: 'Yes, Next Move Chess features a modern chess AI powered by Stockfish’s Efficiently Updatable Neural Network (NNUE). The neural network evaluation was trained on billions of positions to evaluate subtle positional nuances with superhuman accuracy.',
+      },
+      {
+        q: 'What is the best free chess AI?',
+        a: 'Stockfish NNUE is the world’s best free and open-source chess AI. Next Move Chess delivers full, unrestricted web access to Stockfish NNUE directly on your device with zero downloads or subscriptions.',
+      },
+      {
+        q: 'Is using a chess AI to find moves cheating?',
+        a: 'Using a chess AI or engine to determine moves during a live competitive game against a human player is strictly considered cheating and violates fair-play rules on platforms like Chess.com and Lichess. However, using chess AI for post-game review, analysis, tactical puzzles, and opening preparation is 100% legal and recommended for improvement.',
+      },
+      {
+        q: 'What is the best chess move calculator?',
+        a: 'Next Move Chess is the best chess move calculator because it pairs the premier Stockfish NNUE neural engine with an ad-free, instant-loading interface, multi-PV candidate move suggestions, interactive drag-and-drop piece editor, and full mobile optimization.',
+      },
+      {
+        q: 'Is this chess move calculator free to use?',
+        a: 'Yes, Next Move Chess is completely 100% free to use. There are no fees, accounts, credit cards, or paywalls required to analyze games and calculate candidate moves.',
+      },
+    ],
+  },
+  {
+    category: 'Board Setup & Imports',
+    items: [
+      {
+        q: 'How do I import a game from Chess.com or Lichess?',
+        a: 'In your active or past game, click "Share" or "Export" to copy the FEN or PGN string. Paste it into the FEN bar on Next Move Chess to load the exact position immediately.',
+      },
+      {
+        q: 'Can I set up custom or puzzle positions?',
+        a: 'Yes! You can drag any piece from the palette onto the board, erase unwanted pieces, change the side to move, and toggle castling rights.',
+      },
+      {
+        q: 'Does Next Move Chess work on mobile devices?',
+        a: 'Yes, Next Move Chess is built mobile-first. The board, tactile action dock, and evaluation metrics are tailored for touch interaction on iPhones and Android phones.',
+      },
+      {
+        q: 'Are my analyzed games or positions stored privately?',
+        a: 'All position evaluations run client-side on your local device. We do not store or track your private game moves or match histories.',
+      },
+    ],
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: allFaqs.flatMap((section) =>
+    section.items.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    }))
+  ),
+};
+---
+
+<BaseLayout
+  title="Chess Next Move FAQ - Stockfish Engine & Calculation Questions"
+  description="Got questions about calculating your next chess move? Learn how our online chess engine, analysis board, centipawn evaluations, and FEN imports work."
+  keywords="next move chess faq, chess ai, chess move calculator questions, chess engine online, stockfish chess engine, next chess move"
+  activePath="/faq"
+  schema={faqSchema}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: 'FAQ' },
+      ]}
+    />
+
+    <!-- Header -->
+    <header class="space-y-4">
+      <Badge text="Help Center" variant="brand" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
+        Frequently Asked Questions
+      </h1>
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+        Find quick answers to common questions about using Next Move Chess, engine metrics, and device compatibility.
+      </p>
+    </header>
+
+    <!-- FAQ Categories -->
+    <div class="space-y-8">
+      {allFaqs.map((section) => (
+        <div class="space-y-4">
+          <h2 class="text-xl font-bold text-[#f4f4f5] border-b border-[#27272a] pb-2">
+            {section.category}
+          </h2>
+          <div class="space-y-3">
+            {section.items.map((faq) => (
+              <Card class="p-5 sm:p-6">
+                <details class="group cursor-pointer">
+                  <summary class="flex items-center justify-between font-semibold text-[15px] text-[#f4f4f5] list-none">
+                    <span>{faq.q}</span>
+                    <span class="w-6 h-6 rounded-full bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a1a1aa] group-open:rotate-180 transition-transform text-xs shrink-0 ml-4">
+                      ▼
+                    </span>
+                  </summary>
+                  <p class="mt-3 text-[14px] text-[#a1a1aa] leading-relaxed pt-3 border-t border-[#27272a]/60">
+                    {faq.a}
+                  </p>
+                </details>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Contact Callout -->
+    <Card class="bg-gradient-to-br from-[#121212] to-[#18181b] p-8 text-center space-y-4 border-[#27272a]">
+      <h3 class="text-xl font-bold text-[#f4f4f5]">Have more questions?</h3>
+      <p class="text-[14px] text-[#a1a1aa] max-w-md mx-auto">
+        Feel free to reach out to our team with feedback, suggestions, or bug reports.
+      </p>
+      <Button href="/contact" variant="secondary">
+        Contact Support →
+      </Button>
+    </Card>
+  </div>
+</BaseLayout>

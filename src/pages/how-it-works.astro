@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="How Next Move Chess Works - Stockfish Engine & Calculation Logic"
+  description="Discover how Next Move Chess evaluates positions. Learn about Stockfish chess engine NNUE search, bitboards, centipawn scoring, and candidate chess moves calculation."
+  keywords="how next move chess works, chess ai, chess engine, stockfish chess engine, chess move calculator, chess next move calculator, chess game analyzer"
+  activePath="/how-it-works"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: 'How It Works' },
+      ]}
+    />
+
+    <!-- Header -->
+    <header class="space-y-4">
+      <Badge text="Technical Architecture" variant="brand" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
+        How the Next Move Calculator Works
+      </h1>
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+        Next Move Chess combines low-level bitboard representations, deep minimax tree search, and neural network position weights to calculate winning moves in milliseconds.
+      </p>
+    </header>
+
+    <!-- Detailed 4-Stage Breakdown -->
+    <div class="space-y-6">
+      <!-- Stage 1 -->
+      <Card class="p-6 sm:p-8 space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-[#0070f3]/15 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-[14px]">
+            1
+          </span>
+          <h2 class="text-xl font-bold text-[#f4f4f5]">Board Encoding & Bitboard Translation</h2>
+        </div>
+        <p class="text-[15px] text-[#a1a1aa] leading-relaxed">
+          When you set up a position or paste a FEN string, the system parses the board into 64-bit integer masks known as bitboards. Each bit represents an exact square on the board, allowing lightning-fast bitwise calculation of legal moves, pins, and checks.
+        </p>
+        <div class="p-4 rounded-[8px] bg-[#18181b] border border-[#27272a] font-mono text-[12px] text-[#a1a1aa]">
+          FEN: <span class="text-[#00dfd8]">r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 4 5</span>
+        </div>
+      </Card>
+
+      <!-- Stage 2 -->
+      <Card class="p-6 sm:p-8 space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-[#7928ca]/15 text-[#ff0080] flex items-center justify-center font-mono font-bold text-[14px]">
+            2
+          </span>
+          <h2 class="text-xl font-bold text-[#f4f4f5]">Alpha-Beta Minimax Search</h2>
+        </div>
+        <p class="text-[15px] text-[#a1a1aa] leading-relaxed">
+          The engine builds an expansive tree of legal responses. Rather than checking all trillions of branches blindly, alpha-beta pruning cuts off lines that are mathematically proven to be inferior to already discovered candidate moves.
+        </p>
+      </Card>
+
+      <!-- Stage 3 -->
+      <Card class="p-6 sm:p-8 space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-[#00dfd8]/15 text-[#00dfd8] flex items-center justify-center font-mono font-bold text-[14px]">
+            3
+          </span>
+          <h2 class="text-xl font-bold text-[#f4f4f5]">NNUE Neural Network Scoring</h2>
+        </div>
+        <p class="text-[15px] text-[#a1a1aa] leading-relaxed">
+          Leaf positions are scored by an Efficiently Updatable Neural Network (NNUE). The network evaluates pawn structure harmony, king safety corridors, piece coordination, and square control to output an exact centipawn score (e.g. +1.42).
+        </p>
+      </Card>
+
+      <!-- Stage 4 -->
+      <Card class="p-6 sm:p-8 space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-full bg-[#10b981]/15 text-[#10b981] flex items-center justify-center font-mono font-bold text-[14px]">
+            4
+          </span>
+          <h2 class="text-xl font-bold text-[#f4f4f5]">Multi-PV Candidate Ranking & Visual Arrows</h2>
+        </div>
+        <p class="text-[15px] text-[#a1a1aa] leading-relaxed">
+          The engine ranks the top candidate moves, renders clean visual arrows on the board, and provides the full continuation line so you can understand the strategic refutation behind every move.
+        </p>
+      </Card>
+    </div>
+
+    <!-- CTA Section -->
+    <Card class="bg-gradient-to-br from-[#121212] to-[#18181b] p-8 text-center space-y-4 border-[#27272a]">
+      <h3 class="text-2xl font-bold text-[#f4f4f5]">Try the Engine on Your Position</h3>
+      <p class="text-[14px] text-[#a1a1aa] max-w-lg mx-auto">
+        Test our browser-based move calculator and spot winning tactics right now.
+      </p>
+      <Button href="/chess-next-move" variant="primary">
+        Analyze Position Now →
+      </Button>
+    </Card>
+  </div>
+</BaseLayout>

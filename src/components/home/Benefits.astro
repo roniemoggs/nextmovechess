@@ -1,0 +1,74 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+
+const comparisons = [
+  {
+    feature: 'Mobile Usability',
+    legacy: 'Clunky desktop widgets squished onto mobile screens',
+    nextMove: 'Built from the ground up as a native mobile-first touch dock',
+  },
+  {
+    feature: 'Ad Interruption',
+    legacy: 'Heavy banner ads, tracking scripts, and anti-adblock modals',
+    nextMove: 'Clean, distraction-free environment with instant rendering',
+  },
+  {
+    feature: 'Engine Evaluation Meter',
+    legacy: 'Basic text scores or missing live bar charts',
+    nextMove: 'Real-time responsive centipawn meter and winning percentage indicator',
+  },
+  {
+    feature: 'Position Setup & Palette',
+    legacy: 'Slow piece dragging and confusing castling controls',
+    nextMove: 'Tactile piece palette, castling toggles, and instant FEN sync',
+  },
+];
+---
+
+<section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0a]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+      <Badge text="Why Next Move Chess" variant="mono" />
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
+        A Better Way to Calculate Moves
+      </h2>
+      <p class="text-[15px] text-[#a1a1aa]">
+        Compare the next-generation experience against outdated, ad-heavy legacy calculators.
+      </p>
+    </div>
+
+    <!-- Comparison Table Card -->
+    <Card padding="none" class="overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-[#27272a] bg-[#18181b]">
+              <th class="p-4 sm:p-5 text-[#f4f4f5] font-semibold text-[14px]">Capability</th>
+              <th class="p-4 sm:p-5 text-[#71717a] font-mono text-[13px] uppercase">Legacy Chess Calculators</th>
+              <th class="p-4 sm:p-5 text-[#00dfd8] font-mono text-[13px] uppercase bg-[#0070f3]/5 border-l border-[#27272a]">
+                Next Move Chess
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#27272a]">
+            {comparisons.map((item) => (
+              <tr class="hover:bg-[#151518] transition-colors">
+                <td class="p-4 sm:p-5 font-semibold text-[#f4f4f5]">{item.feature}</td>
+                <td class="p-4 sm:p-5 text-[#71717a]">{item.legacy}</td>
+                <td class="p-4 sm:p-5 text-[#f4f4f5] font-medium bg-[#0070f3]/5 border-l border-[#27272a]">
+                  <span class="inline-flex items-center gap-1.5 text-[#00dfd8]">
+                    <svg class="w-4 h-4 shrink-0 text-[#10b981]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {item.nextMove}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
+  </div>
+</section>

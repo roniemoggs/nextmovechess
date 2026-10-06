@@ -1,0 +1,196 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+
+const popularLinks = [
+  {
+    title: 'Chess Move Calculator',
+    description: 'Calculate best moves, candidate variations, and evaluations with Stockfish NNUE.',
+    href: '/chess-next-move',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    tag: 'Tool',
+    badgeVariant: 'brand' as const,
+  },
+  {
+    title: 'Learn & Strategy Guides',
+    description: 'Master key opening principles, tactical patterns, and endgame techniques.',
+    href: '/learn',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+    tag: 'Guides',
+    badgeVariant: 'mono' as const,
+  },
+  {
+    title: 'How It Works',
+    description: 'Discover how zero-latency client-side WebAssembly Stockfish engine operates.',
+    href: '/how-it-works',
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+    tag: 'Technology',
+    badgeVariant: 'mono' as const,
+  },
+  {
+    title: 'Frequently Asked Questions',
+    description: 'Answers to engine evaluation queries, FEN/PGN importing, and fair play.',
+    href: '/faq',
+    icon: 'M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    tag: 'Help',
+    badgeVariant: 'mono' as const,
+  },
+];
+---
+
+<BaseLayout
+  title="404 - Position Not Found"
+  description="The chess position or page you are looking for does not exist or has been moved out of bounds."
+  activePath="/404"
+  noindex={true}
+>
+  <div class="relative overflow-hidden w-full py-12 sm:py-20 lg:py-24">
+    <!-- Ambient Background Glows -->
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-[#0070f3]/15 via-[#7928ca]/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute top-1/2 right-10 w-[300px] h-[300px] bg-[#00dfd8]/5 blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
+      
+      <!-- Graphic & Error Badge -->
+      <div class="flex flex-col items-center space-y-6">
+        <Badge text="Error 404 • Out of Bounds" variant="brand">
+          <svg slot="icon" class="w-3.5 h-3.5 text-[#00dfd8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </Badge>
+
+        <!-- Visual Chessboard 404 Motif -->
+        <div class="relative group my-2">
+          <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-gradient-to-br from-[#18181b] via-[#121212] to-[#0a0a0a] border border-[#27272a] shadow-[0_0_50px_rgba(0,112,243,0.15)] flex items-center justify-center relative overflow-hidden">
+            <!-- Chessboard Mini Grid Backdrop -->
+            <div class="absolute inset-0 grid grid-cols-4 grid-rows-4 opacity-15">
+              {Array.from({ length: 16 }).map((_, i) => {
+                const isDark = (Math.floor(i / 4) + (i % 4)) % 2 === 1;
+                return <div class={isDark ? 'bg-white' : 'bg-transparent'} />;
+              })}
+            </div>
+
+            <!-- Stylized Knight / Off-the-board Question Mark -->
+            <div class="relative z-10 flex flex-col items-center justify-center">
+              <svg class="w-16 h-16 sm:w-20 sm:h-20 text-[#00dfd8] drop-shadow-[0_0_12px_rgba(0,223,216,0.5)] transition-transform duration-300 group-hover:scale-105" viewBox="0 0 32 32" fill="none">
+                <path
+                  d="M7 26.5C7 25.5 8 24.5 9.5 24.5H22.5C24 24.5 25 25.5 25 26.5V27C25 27.5 24.5 28 24 28H8C7.5 28 7 27.5 7 27V26.5Z"
+                  fill="currentColor"
+                  opacity="0.6"
+                />
+                <path
+                  d="M8.5 23.5L9.8 17.2C10.1 15.6 9.8 13.9 9.1 12.5L8.5 11.2C8.2 10.5 8.4 9.7 9 9.2L12.8 6C13.6 5.3 14.7 5.4 15.3 6.2L16.2 7.4C16.6 8 17.3 8.3 18 8.2L21.4 7.7C22.4 7.5 23.3 8.2 23.5 9.2L23.8 11C24 12.1 23.5 13.1 22.5 13.7L19.5 15.5L22.5 23.5H8.5Z"
+                  fill="currentColor"
+                />
+                <!-- Glowing question mark query on eye -->
+                <circle cx="18" cy="10.5" r="1.5" fill="#ffffff" />
+              </svg>
+            </div>
+
+            <!-- Glowing decorative ring -->
+            <div class="absolute inset-0 rounded-2xl border border-[#00dfd8]/20 pointer-events-none"></div>
+          </div>
+
+          <!-- Large 404 Watermark text -->
+          <div class="absolute -top-4 -right-6 font-mono text-5xl sm:text-6xl font-black text-[#27272a]/70 select-none -z-0">
+            404
+          </div>
+        </div>
+
+        <!-- Typography Heading -->
+        <div class="space-y-3 max-w-2xl">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5]">
+            Position Not Found
+          </h1>
+          <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+            The square or URL coordinate you navigated to is off the board. The page may have been moved, deleted, or was never part of our opening book.
+          </p>
+        </div>
+
+        <!-- FEN Chess Notation Easter Egg -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#121212] border border-[#27272a] text-[12px] font-mono text-[#71717a]">
+          <span class="text-[#00dfd8]">FEN:</span>
+          <span>8/8/8/404/8/8/8/8 w - - 0 1</span>
+          <span class="text-[#a1a1aa] text-[11px]">(Illegal move)</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <Button href="/chess-next-move" variant="primary" class="shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+          <svg slot="left-icon" class="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Calculate Next Move
+        </Button>
+        <Button href="/" variant="secondary">
+          <svg slot="left-icon" class="w-4 h-4 mr-2 text-[#a1a1aa]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          Return to Home
+        </Button>
+      </div>
+
+      <!-- Quick Helpful Navigation Grid -->
+      <div class="pt-8 border-t border-[#27272a]/60 space-y-6 text-left">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-semibold uppercase tracking-wider text-[#71717a] font-mono">
+            Explore Popular Repertoire
+          </h2>
+          <span class="text-[12px] text-[#a1a1aa]">Select a square to continue</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {popularLinks.map((item) => (
+            <Card
+              as="a"
+              href={item.href}
+              hoverEffect={true}
+              class="p-5 flex flex-col justify-between border-[#27272a] bg-[#121212]/80 hover:border-[#3f3f46] group transition-all"
+            >
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="w-8 h-8 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#00dfd8] group-hover:text-white group-hover:bg-[#0070f3] transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d={item.icon} />
+                    </svg>
+                  </div>
+                  <Badge text={item.tag} variant={item.badgeVariant} />
+                </div>
+                <h3 class="text-[15px] font-semibold text-[#f4f4f5] group-hover:text-[#00dfd8] transition-colors">
+                  {item.title}
+                </h3>
+                <p class="text-[13px] text-[#a1a1aa] leading-snug">
+                  {item.description}
+                </p>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-[#27272a]/40 flex items-center text-[12px] font-medium text-[#00dfd8] group-hover:translate-x-0.5 transition-transform">
+                Visit page
+                <svg class="w-3.5 h-3.5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      <!-- Need direct assistance footer -->
+      <div class="pt-4 text-center">
+        <p class="text-[13px] text-[#71717a]">
+          Think this is a system blunder?{' '}
+          <a href="/contact" class="text-[#00dfd8] hover:underline font-medium">
+            Contact Support & Feedback
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>

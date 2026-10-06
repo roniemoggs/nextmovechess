@@ -1,0 +1,60 @@
+---
+import Card from '../ui/Card.astro';
+import Badge from '../ui/Badge.astro';
+
+const steps = [
+  {
+    step: '01',
+    title: 'Set or Import Your Position',
+    desc: 'Drag pieces onto the board, use quick palette presets, or paste a FEN string from Chess.com or Lichess.',
+    tag: 'Board Setup',
+  },
+  {
+    step: '02',
+    title: 'Instant Engine Calculation',
+    desc: 'The engine evaluates millions of candidate branches per second using modern alpha-beta search and neural heuristics.',
+    tag: 'Deep Calculation',
+  },
+  {
+    step: '03',
+    title: 'Play and Learn the Best Move',
+    desc: 'View visual board arrows, centipawn score differences, and multi-PV variations to understand the key winning plan.',
+    tag: 'Execution',
+  },
+];
+---
+
+<section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0a]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+      <Badge text="Simple Workflow" variant="mono" />
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
+        How Next Move Chess Works
+      </h2>
+      <p class="text-[15px] text-[#a1a1aa]">
+        Three simple steps from any tricky position to an optimal grandmaster-level move.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {steps.map((item) => (
+        <Card hoverEffect={true} class="relative overflow-hidden group">
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-3xl font-bold font-mono text-[#27272a] group-hover:text-[#00dfd8] transition-colors">
+              {item.step}
+            </span>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#18181b] text-[#71717a] border border-[#27272a]">
+              {item.tag}
+            </span>
+          </div>
+          <h3 class="text-lg font-bold text-[#f4f4f5] mb-2 tracking-tight group-hover:text-[#ffffff]">
+            {item.title}
+          </h3>
+          <p class="text-[14px] text-[#a1a1aa] leading-relaxed">
+            {item.desc}
+          </p>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>

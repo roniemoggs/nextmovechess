@@ -1,11 +1,78 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import HowItWorks from '../components/home/HowItWorks.astro';
+import Features from '../components/home/Features.astro';
+import Benefits from '../components/home/Benefits.astro';
+import SeoGuide from '../components/home/SeoGuide.astro';
+import FAQSection from '../components/home/FAQSection.astro';
+import CTASection from '../components/home/CTASection.astro';
+import ArticleCard from '../components/learn/ArticleCard.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const articles = await getCollection('learn');
+const featuredArticles = articles.slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Next Move Chess - Best Chess Move Calculator & Stockfish Engine Online"
+  description="Calculate your next chess move with Next Move Chess. Free online chess engine, interactive chess analysis board, candidate move calculator, and best opening chess moves analysis."
+  activePath="/"
+>
+  <!-- Hero with Integrated Tool Preview -->
+  <Hero />
+
+  <!-- 3-Step Process -->
+  <HowItWorks />
+
+  <!-- Features Grid -->
+  <Features />
+
+  <!-- Competitive Comparison -->
+  <Benefits />
+
+  <!-- In-Depth 1500+ Word SEO Guide & Deep-Dive Analysis -->
+  <SeoGuide />
+
+  <!-- Educational Guides Section -->
+  <section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div class="space-y-2">
+          <Badge text="Chess Academy" variant="brand" />
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
+            Master Move Calculation & Strategy
+          </h2>
+          <p class="text-[15px] text-[#a1a1aa] max-w-xl">
+            In-depth tactical guides and positional analysis to help you think like a Grandmaster.
+          </p>
+        </div>
+        <Button href="/learn" variant="secondary" class="shrink-0">
+          View All Guides →
+        </Button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredArticles.map((article: any) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            slug={article.id}
+            category={article.data.category}
+            readTime={article.data.readTime}
+            pubDate={article.data.pubDate}
+            featured={article.data.featured}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQSection />
+
+  <!-- Final CTA -->
+  <CTASection />
+</BaseLayout>

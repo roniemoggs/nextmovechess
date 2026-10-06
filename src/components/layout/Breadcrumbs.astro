@@ -1,4 +1,7 @@
 ---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
 interface Item {
   name: string;
   href?: string;
@@ -6,7 +9,12 @@ interface Item {
 
 interface Props {
   items: Item[];
+  lang?: SupportedLanguage;
 }
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
 
 const { items } = Astro.props;
 ---
@@ -14,12 +22,12 @@ const { items } = Astro.props;
 <nav aria-label="Breadcrumb" class="mb-6">
   <ol class="flex items-center space-x-2 text-[12px] font-mono text-[#71717a]">
     <li>
-      <a href="/" class="hover:text-[#f4f4f5] transition-colors flex items-center gap-1">
+      <a href={translatePath('/')} class="hover:text-[#f4f4f5] transition-colors flex items-center gap-1">
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
           <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
-        Home
+        {t('nav.home')}
       </a>
     </li>
 

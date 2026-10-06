@@ -1,14 +1,23 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
-import ArticleCard from '../../components/learn/ArticleCard.astro';
-import Badge from '../../components/ui/Badge.astro';
-import Button from '../../components/ui/Button.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/layout/Breadcrumbs.astro';
+import ArticleCard from '../../../components/learn/ArticleCard.astro';
+import Badge from '../../../components/ui/Badge.astro';
+import Button from '../../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
-import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+import { languages, defaultLang, type SupportedLanguage } from '../../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../../i18n/utils';
 
-const t = useTranslations('en');
-const translatePath = useTranslatedPath('en');
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const articles = await getCollection('learn');
 articles.sort((a: any, b: any) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
@@ -18,8 +27,8 @@ articles.sort((a: any, b: any) => b.data.pubDate.getTime() - a.data.pubDate.getT
   title={t('meta.learnTitle')}
   description={t('meta.learnDesc')}
   keywords={t('meta.homeKeywords')}
-  activePath="/learn"
-  lang="en"
+  activePath={translatePath('/learn')}
+  lang={lang}
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
     <!-- Breadcrumbs -->
@@ -51,7 +60,6 @@ articles.sort((a: any, b: any) => b.data.pubDate.getTime() - a.data.pubDate.getT
           readTime={article.data.readTime}
           pubDate={article.data.pubDate}
           featured={article.data.featured}
-          lang="en"
         />
       ))}
     </div>

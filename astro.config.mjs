@@ -1,19 +1,24 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nextmovechesss.com',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'pt-br', 'es', 'fr', 'de', 'ja', 'tr', 'id', 'ko'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   server: {
     host: true,
     port: 4321,
   },
   vite: {
-    optimizeDeps: {
-      include: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime', 'chess.js', 'react-chessboard', 'lucide-react', 'lucide-astro'],
-      exclude: ['stockfish.js'],
-    },
+    plugins: [tailwindcss()],
   },
   integrations: [
     react(),

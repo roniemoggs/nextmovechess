@@ -2,6 +2,16 @@
 import Card from '../ui/Card.astro';
 import Badge from '../ui/Badge.astro';
 import Button from '../ui/Button.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
 ---
 
 <section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0c] relative">
@@ -38,7 +48,7 @@ import Button from '../ui/Button.astro';
         </p>
 
         <p>
-          <strong class="text-[#f4f4f5]">Next Move Chess</strong> was engineered from the ground up to serve as the web’s most responsive and accessible <strong class="text-[#f4f4f5]">next move chess calculator</strong>. Unlike sluggish desktop software or ad-bloated legacy platforms, Next Move Chess runs directly in your browser. Powered by client-side neural technology, our <strong class="text-[#f4f4f5]">chess move calculator</strong> evaluates millions of tactical possibilities in fractions of a second, highlighting concrete tactical refutations, positional imbalances, and winning continuation lines.
+          <strong class="text-[#f4f4f5]">Next Move Chess</strong> was engineered from the ground up by <a href="https://shyamikaai.com/" target="_blank" rel="noopener" class="text-[#00dfd8] hover:underline font-semibold">Shyamika AI</a> to serve as the web’s most responsive and accessible <strong class="text-[#f4f4f5]">next move chess calculator</strong>. Unlike sluggish desktop software or ad-bloated legacy platforms, Next Move Chess runs directly in your browser. Powered by client-side neural technology, our <strong class="text-[#f4f4f5]">chess move calculator</strong> evaluates millions of tactical possibilities in fractions of a second, highlighting concrete tactical refutations, positional imbalances, and winning continuation lines.
         </p>
 
         <p>
@@ -437,10 +447,10 @@ import Button from '../ui/Button.astro';
           Put theory into practice. Set up your current board or paste your game FEN above to discover the engine's strongest tactical continuation.
         </p>
         <div class="pt-2 flex flex-wrap items-center justify-center gap-4">
-          <Button href="/chess-next-move" variant="primary">
+          <Button href={translatePath('/chess-next-move')} variant="primary">
             Launch Chess Tool →
           </Button>
-          <Button href="/learn" variant="secondary">
+          <Button href={translatePath('/learn')} variant="secondary">
             Explore Strategy Guides
           </Button>
         </div>

@@ -1,27 +1,36 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ChessToolContainer from '../components/chess/ChessToolContainer.astro';
-import Card from '../components/ui/Card.astro';
-import Button from '../components/ui/Button.astro';
-import { useTranslations, useTranslatedPath } from '../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ChessToolContainer from '../../components/chess/ChessToolContainer.astro';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const t = useTranslations('en');
-const translatePath = useTranslatedPath('en');
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <BaseLayout
   title={t('meta.toolTitle')}
   description={t('meta.toolDesc')}
   keywords={t('meta.toolKeywords')}
-  activePath="/chess-next-move"
+  activePath={translatePath('/chess-next-move')}
   isToolPage={true}
-  lang="en"
+  lang={lang}
 >
   <div class="w-full flex-1 flex flex-col justify-start py-4 sm:py-6">
     <!-- Main Tool Container -->
-    <ChessToolContainer />
+    <ChessToolContainer lang={lang} />
 
-    <!-- Helpful Instructions & FAQs Accordion below tool -->
+    <!-- Helpful Instructions & Guides Accordion below tool -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 w-full space-y-8">
       
       <!-- 3-Column Tool Guide -->

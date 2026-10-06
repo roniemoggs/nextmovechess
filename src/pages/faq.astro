@@ -4,6 +4,10 @@ import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
 import Card from '../components/ui/Card.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
+import { useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const t = useTranslations('en');
+const translatePath = useTranslatedPath('en');
 
 const allFaqs = [
   {
@@ -117,28 +121,29 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Chess Next Move FAQ - Stockfish Engine & Calculation Questions"
-  description="Got questions about calculating your next chess move? Learn how our online chess engine, analysis board, centipawn evaluations, and FEN imports work."
-  keywords="next move chess faq, chess ai, chess move calculator questions, chess engine online, stockfish chess engine, next chess move"
+  title={t('meta.faqTitle')}
+  description={t('meta.faqDesc')}
+  keywords={t('meta.homeKeywords')}
   activePath="/faq"
   schema={faqSchema}
+  lang="en"
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
     <!-- Breadcrumbs -->
     <Breadcrumbs
       items={[
-        { name: 'FAQ' },
+        { name: t('nav.faq') },
       ]}
     />
 
     <!-- Header -->
     <header class="space-y-4">
-      <Badge text="Help Center" variant="brand" />
+      <Badge text={t('faq.badge')} variant="brand" />
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
-        Frequently Asked Questions
+        {t('faq.title')}
       </h1>
       <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
-        Find quick answers to common questions about using Next Move Chess, engine metrics, and device compatibility.
+        {t('faq.desc')}
       </p>
     </header>
 
@@ -172,12 +177,12 @@ const faqSchema = {
 
     <!-- Contact Callout -->
     <Card class="bg-gradient-to-br from-[#121212] to-[#18181b] p-8 text-center space-y-4 border-[#27272a]">
-      <h3 class="text-xl font-bold text-[#f4f4f5]">Have more questions?</h3>
+      <h3 class="text-xl font-bold text-[#f4f4f5]">{t('faq.contactTitle')}</h3>
       <p class="text-[14px] text-[#a1a1aa] max-w-md mx-auto">
-        Feel free to reach out to our team with feedback, suggestions, or bug reports.
+        {t('faq.contactDesc')}
       </p>
-      <Button href="/contact" variant="secondary">
-        Contact Support →
+      <Button href={translatePath('/contact')} variant="secondary">
+        {t('faq.contactBtn')}
       </Button>
     </Card>
   </div>

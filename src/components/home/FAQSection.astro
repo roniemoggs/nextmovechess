@@ -1,66 +1,205 @@
 ---
 import Card from '../ui/Card.astro';
 import Badge from '../ui/Badge.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
 
-export const homeFaqs = [
-  {
-    q: 'How do I find the best next move in chess?',
-    a: 'To find the best next move in chess, set up your position on Next Move Chess by dragging pieces or pasting a FEN/PGN code. The Stockfish NNUE engine calculates millions of possibilities per second to display the optimal candidate moves and numerical evaluations.',
-  },
-  {
-    q: 'What is the best opening move in chess?',
-    a: '1.e4 (King’s Pawn) and 1.d4 (Queen’s Pawn) are statistically and strategically the best opening moves in chess for White. They stake immediate central control and facilitate rapid piece development. 1.c4 (English) and 1.Nf3 (Réti) are also elite grandmaster choices.',
-  },
-  {
-    q: 'What is the best move in my chess position?',
-    a: 'The best move in your position depends on tactical factors (checks, captures, threats) and positional goals (king safety, piece activity). Input your position into Next Move Chess to receive the mathematically strongest move computed by our Stockfish chess AI.',
-  },
-  {
-    q: 'What’s my next chess move?',
-    a: 'Find your next chess move instantly by pasting your FEN string or playing moves on the analysis board. Next Move Chess highlights the highest-rated continuation with dynamic visual arrows and deep line evaluations.',
-  },
-  {
-    q: 'What is a chess engine?',
-    a: 'A chess engine is a specialized computer program that calculates chess moves and evaluates positions using minimax search trees, alpha-beta pruning, and neural evaluation networks (NNUE).',
-  },
-  {
-    q: 'What is the strongest chess engine?',
-    a: 'Stockfish (specifically Stockfish NNUE) is globally recognized as the strongest chess engine in the world, with an estimated Elo exceeding 3500+ and dominant victories in top computer chess championships.',
-  },
-  {
-    q: 'What is the best chess move in any position?',
-    a: 'The best chess move is the move that maximizes your winning chances or preserves optimal strategic balance, identified through deep calculation of all candidate responses.',
-  },
-  {
-    q: 'How does a chess engine find the best move?',
-    a: 'A chess engine generates a tree of possible future moves, prunes sub-optimal branches using alpha-beta search, and evaluates terminal positions with neural networks to assign a centipawn score to each option.',
-  },
-  {
-    q: 'Is this chess move calculator free to use?',
-    a: 'Yes, Next Move Chess is 100% free with no registration, subscriptions, or paywalls required.',
-  },
-  {
-    q: 'What is the best chess move calculator?',
-    a: 'Next Move Chess is the best chess move calculator online, offering Stockfish NNUE neural engine analysis, instant FEN/PGN import, mobile optimization, and zero ads.',
-  },
-  {
-    q: 'Is using a chess AI to find moves cheating?',
-    a: 'Using a chess AI during a live game against another human player is considered cheating and violates fair play rules. However, using chess AI for post-game analysis, study, and training is completely fair and highly encouraged.',
-  },
-  {
-    q: 'Is this a chess AI?',
-    a: 'Yes, Next Move Chess is powered by Stockfish NNUE, a state-of-the-art neural network chess AI trained on billions of positions to deliver grandmaster-level positional evaluations.',
-  },
-  {
-    q: 'What is the best free chess AI?',
-    a: 'Stockfish NNUE is the world’s best free and open-source chess AI, and Next Move Chess lets you run it directly in your browser with zero setup.',
-  },
-];
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
+
+// Localized FAQ items
+const localizedFaqData: Record<SupportedLanguage, Array<{ q: string; a: string }>> = {
+  en: [
+    {
+      q: 'How do I find the best next move in chess?',
+      a: 'To find the best next move in chess, set up your position on Next Move Chess by dragging pieces or pasting a FEN/PGN code. The Stockfish NNUE engine calculates millions of possibilities per second to display the optimal candidate moves and numerical evaluations.',
+    },
+    {
+      q: 'What is the best opening move in chess?',
+      a: '1.e4 (King’s Pawn) and 1.d4 (Queen’s Pawn) are statistically and strategically the best opening moves in chess for White. They stake immediate central control and facilitate rapid piece development. 1.c4 (English) and 1.Nf3 (Réti) are also elite grandmaster choices.',
+    },
+    {
+      q: 'What is the best move in my chess position?',
+      a: 'The best move in your position depends on tactical factors (checks, captures, threats) and positional goals (king safety, piece activity). Input your position into Next Move Chess to receive the mathematically strongest move computed by our Stockfish chess AI.',
+    },
+    {
+      q: 'What’s my next chess move?',
+      a: 'Find your next chess move instantly by pasting your FEN string or playing moves on the analysis board. Next Move Chess highlights the highest-rated continuation with dynamic visual arrows and deep line evaluations.',
+    },
+    {
+      q: 'What is a chess engine?',
+      a: 'A chess engine is a specialized computer program that calculates chess moves and evaluates positions using minimax search trees, alpha-beta pruning, and neural evaluation networks (NNUE).',
+    },
+    {
+      q: 'What is the strongest chess engine?',
+      a: 'Stockfish (specifically Stockfish NNUE) is globally recognized as the strongest chess engine in the world, with an estimated Elo exceeding 3500+ and dominant victories in top computer chess championships.',
+    },
+    {
+      q: 'Is this chess move calculator free to use?',
+      a: 'Yes, Next Move Chess is 100% free with no registration, subscriptions, or paywalls required.',
+    },
+    {
+      q: 'Is using a chess AI to find moves cheating?',
+      a: 'Using a chess AI during a live game against another human player is considered cheating and violates fair play rules. However, using chess AI for post-game analysis, study, and training is completely fair and highly encouraged.',
+    },
+  ],
+  'pt-br': [
+    {
+      q: 'Como encontrar a melhor próxima jogada no xadrez?',
+      a: 'Monte a posição do seu jogo no Next Move Chess arrastando as peças ou colando o código FEN. A engine Stockfish NNUE avalia milhões de posições por segundo e indica as melhores jogadas de xadrez.',
+    },
+    {
+      q: 'Qual é o melhor lance de abertura no xadrez?',
+      a: 'Os lances 1.e4 e 1.d4 são estatisticamente as melhores jogadas de abertura no xadrez para as Brancas, disputando o centro imediatamente.',
+    },
+    {
+      q: 'Qual é a melhor jogada na minha posição de xadrez?',
+      a: 'A melhor jogada depende de fatores táticos e posicionais. Insira sua posição no Next Move Chess para obter o cálculo do lance ideal pela nossa IA de xadrez.',
+    },
+    {
+      q: 'O que é uma engine de xadrez?',
+      a: 'Uma engine de xadrez é um software especializado que calcula variantes de jogadas usando árvores minimax, poda alfa-beta e redes neurais (NNUE).',
+    },
+    {
+      q: 'Qual é a engine de xadrez mais forte do mundo?',
+      a: 'O Stockfish NNUE é reconhecido mundialmente como a engine de xadrez mais forte, com mais de 3500 de rating Elo.',
+    },
+    {
+      q: 'Essa calculadora de xadrez é gratuita?',
+      a: 'Sim, o Next Move Chess é 100% grátis, sem necessidade de cadastro, cartões ou assinaturas.',
+    },
+  ],
+  es: [
+    {
+      q: '¿Cómo encontrar el mejor siguiente movimiento en ajedrez?',
+      a: 'Coloca las piezas en el tablero de Next Move Chess o pega tu código FEN. El motor Stockfish NNUE calculará millones de variantes por segundo para mostrarte las mejores jugadas de ajedrez.',
+    },
+    {
+      q: '¿Cuál es el mejor movimiento de apertura en ajedrez?',
+      a: '1.e4 y 1.d4 son estadísticamente los mejores movimientos iniciales en ajedrez para las blancas, asegurando el control central inmediato.',
+    },
+    {
+      q: '¿Cuál es la mejor jugada en mi posición de ajedrez?',
+      a: 'La mejor jugada depende de la táctica y la estrategia. Introduce tu tablero en Next Move Chess y el motor de ajedrez calculará la mejor continuación.',
+    },
+    {
+      q: '¿Qué es un motor de ajedrez?',
+      a: 'Un motor de ajedrez es un programa informático diseñado para calcular jugadas y evaluar posiciones mediante algoritmos minimax y redes neuronales NNUE.',
+    },
+    {
+      q: '¿Cuál es el motor de ajedrez más fuerte?',
+      a: 'Stockfish NNUE es el motor de ajedrez más potente del mundo, con más de 3500 puntos Elo estimados.',
+    },
+    {
+      q: '¿Es gratis esta calculadora de ajedrez?',
+      a: 'Sí, Next Move Chess es 100% gratuita y no requiere registro ni suscripciones.',
+    },
+  ],
+  fr: [
+    {
+      q: 'Comment trouver le meilleur coup aux échecs ?',
+      a: 'Placez vos pièces sur l’échiquier Next Move Chess ou collez un code FEN. Le moteur Stockfish NNUE calcule des millions de positions pour afficher les meilleurs coups candidats.',
+    },
+    {
+      q: 'Quel est le meilleur coup d’ouverture aux échecs ?',
+      a: '1.e4 et 1.d4 sont statistiquement les meilleurs premiers coups aux échecs pour les Blancs car ils contrôlent le centre immédiatement.',
+    },
+    {
+      q: 'Quel est le moteur d’échecs le plus fort ?',
+      a: 'Stockfish NNUE est universellement reconnu comme le moteur d’échecs le plus puissant au monde avec plus de 3500 Elo.',
+    },
+    {
+      q: 'Ce calculateur d’échecs est-il gratuit ?',
+      a: 'Oui, Next Move Chess est entièrement gratuit, sans inscription ni publicité intrusive.',
+    },
+  ],
+  de: [
+    {
+      q: 'Wie finde ich den besten nächsten Schachzug?',
+      a: 'Baue deine Stellung auf dem Schachbrett von Next Move Chess auf oder füge einen FEN-Code ein. Die Stockfish NNUE-Engine berechnet sofort die besten Kandidatenzüge.',
+    },
+    {
+      q: 'Was ist der beste Eröffnungszug im Schach?',
+      a: '1.e4 und 1.d4 sind statistisch die erfolgreichsten Eröffnungszüge im Schach für Weiß, um sofort das Zentrum zu beherrschen.',
+    },
+    {
+      q: 'Welche Schach-Engine ist die stärkste der Welt?',
+      a: 'Stockfish NNUE gilt mit über 3500 Elo als die stärkste Schach-Engine der Welt und läuft direkt in deinem Browser.',
+    },
+    {
+      q: 'Ist dieser Schachzug-Rechner kostenlos?',
+      a: 'Ja, Next Move Chess ist zu 100% kostenlos, ohne Anmeldung und werbefrei.',
+    },
+  ],
+  ja: [
+    {
+      q: 'チェスで次の最善手を見つけるにはどうすればよいですか？',
+      a: 'Next Move Chessの盤上に駒を配置するかFENコードを貼り付けてください。Stockfish NNUEエンジンが数百万局面を読み、最善の手順を即座に表示します。',
+    },
+    {
+      q: 'チェスで最も強いエンジンは何ですか？',
+      a: 'Stockfish NNUEが世界最強のチェスエンジンとして広く認知されており、レーティングは3500 Eloを超えています。',
+    },
+    {
+      q: 'このチェス計算ツールは無料で使えますか？',
+      a: 'はい、Next Move Chessは完全無料で、会員登録や広告の煩わしさも一切ありません。',
+    },
+  ],
+  tr: [
+    {
+      q: 'Satrançta en iyi sonraki hamleyi nasıl bulabilirim?',
+      a: 'Tahtaya taşları yerleştirin veya FEN kodunu yapıştırın. Stockfish NNUE satranç motoru saniyede milyonlarca konumu hesaplayarak en iyi hamleleri gösterir.',
+    },
+    {
+      q: 'Dünyanın en güçlü satranç motoru hangisidir?',
+      a: 'Stockfish NNUE, 3500+ üzeri Elo gücüyle dünyanın en güçlü satranç motoru olarak kabul edilir.',
+    },
+    {
+      q: 'Bu satranç hesaplayıcı ücretsiz mi?',
+      a: 'Evet, Next Move Chess tamamen ücretsizdir ve kayıt gerektirmez.',
+    },
+  ],
+  id: [
+    {
+      q: 'Bagaimana cara menemukan langkah catur terbaik berikutnya?',
+      a: 'Atur posisi di papan Next Move Chess atau tempel kode FEN. Mesin Stockfish NNUE akan menghitung jutaan variasi untuk menampilkan langkah catur terbaik.',
+    },
+    {
+      q: 'Apa mesin catur terkuat di dunia?',
+      a: 'Stockfish NNUE diakui sebagai mesin catur terkuat di dunia dengan perkiraan Elo di atas 3500+.',
+    },
+    {
+      q: 'Apakah kalkulator catur ini gratis?',
+      a: 'Ya, Next Move Chess 100% gratis tanpa perlu registrasi atau langganan apa pun.',
+    },
+  ],
+  ko: [
+    {
+      q: '체스에서 다음 최선의 수를 어떻게 찾을 수 있나요?',
+      a: 'Next Move Chess 체스판에 기물을 배치하거나 FEN 코드를 붙여넣으세요. Stockfish NNUE 엔진이 최적의 후보수와 수순을 즉시 계산합니다.',
+    },
+    {
+      q: '세계에서 가장 강력한 체스 엔진은 무엇인가요?',
+      a: 'Stockfish NNUE는 3500 이상의 레이팅을 기록하며 세계 최강의 체스 엔진으로 인정받고 있습니다.',
+    },
+    {
+      q: '이 체스 계산기는 무료인가요?',
+      a: '네, Next Move Chess는 회원가입이나 결제 없이 100% 무료로 이용하실 수 있습니다.',
+    },
+  ],
+};
+
+const currentFaqs = localizedFaqData[currentLang] || localizedFaqData.en;
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: homeFaqs.map((faq) => ({
+  mainEntity: currentFaqs.map((faq) => ({
     '@type': 'Question',
     name: faq.q,
     acceptedAnswer: {
@@ -74,17 +213,17 @@ const faqSchema = {
 <section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0c0c0e]">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14 space-y-3">
-      <Badge text="Got Questions?" variant="mono" />
+      <Badge text={t('faq.badge')} variant="mono" />
       <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
-        Frequently Asked Questions
+        {t('faq.title')}
       </h2>
       <p class="text-[15px] text-[#a1a1aa]">
-        Everything you need to know about chess analysis, AI calculation, and engine evaluations.
+        {t('faq.desc')}
       </p>
     </div>
 
     <div class="space-y-4">
-      {homeFaqs.map((faq, index) => (
+      {currentFaqs.map((faq) => (
         <Card class="p-5 sm:p-6">
           <details class="group cursor-pointer">
             <summary class="flex items-center justify-between font-semibold text-[16px] text-[#f4f4f5] list-none">
@@ -103,10 +242,10 @@ const faqSchema = {
 
     <div class="mt-10 text-center">
       <a
-        href="/faq"
+        href={translatePath('/faq')}
         class="inline-flex items-center gap-2 text-sm font-semibold text-[#00dfd8] hover:text-[#00dfd8]/80 transition-colors"
       >
-        View All Questions & Guides in FAQ Center →
+        {t('homeLearn.viewAll')}
       </a>
     </div>
   </div>

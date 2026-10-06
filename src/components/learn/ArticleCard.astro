@@ -1,6 +1,8 @@
 ---
 import Card from '../ui/Card.astro';
 import Badge from '../ui/Badge.astro';
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
 
 interface Props {
   title: string;
@@ -10,11 +12,15 @@ interface Props {
   readTime: string;
   pubDate: Date;
   featured?: boolean;
+  lang?: SupportedLanguage;
 }
 
 const { title, description, slug, category, readTime, pubDate, featured = false } = Astro.props;
 
-const formattedDate = new Intl.DateTimeFormat('en-US', {
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(currentLang);
+
+const formattedDate = new Intl.DateTimeFormat(currentLang === 'en' ? 'en-US' : currentLang, {
   year: 'numeric',
   month: 'short',
   day: 'numeric',
@@ -23,7 +29,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
 <Card
   as="a"
-  href={`/learn/${slug}`}
+  href={translatePath(`/learn/${slug}`)}
   hoverEffect={true}
   class={`group flex flex-col justify-between h-full p-6 ${
     featured ? 'border-[#0070f3]/40 bg-gradient-to-br from-[#121212] to-[#16161a]' : ''

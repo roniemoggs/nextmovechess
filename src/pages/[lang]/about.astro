@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<BaseLayout
+  title={t('meta.aboutTitle')}
+  description={t('meta.aboutDesc')}
+  keywords={t('meta.homeKeywords')}
+  activePath={translatePath('/about')}
+  lang={lang}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: t('nav.about') },
+      ]}
+    />
+
+    <!-- Header Section with Mesh Gradient -->
+    <header class="space-y-4 text-left">
+      <Badge text={t('nav.about')} variant="brand" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
+        Next Move Chess — {t('hero.titleHighlight')}
+      </h1>
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl">
+        Next Move Chess (<span class="font-mono text-[#00dfd8]">nextmovechesss.com</span>) {t('meta.aboutDesc')}
+      </p>
+    </header>
+
+    <!-- Key Stats Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <Card class="p-4 sm:p-5 text-center space-y-1 border-[#27272a] bg-[#121212]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#f4f4f5] font-mono">0ms</div>
+        <div class="text-[12px] text-[#a1a1aa] font-medium">WebAssembly Latency</div>
+      </Card>
+      <Card class="p-4 sm:p-5 text-center space-y-1 border-[#27272a] bg-[#121212]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#00dfd8] font-mono">NNUE</div>
+        <div class="text-[12px] text-[#a1a1aa] font-medium">Stockfish Neural Eval</div>
+      </Card>
+      <Card class="p-4 sm:p-5 text-center space-y-1 border-[#27272a] bg-[#121212]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#10b981] font-mono">100%</div>
+        <div class="text-[12px] text-[#a1a1aa] font-medium">{t('hero.statFree')}</div>
+      </Card>
+      <Card class="p-4 sm:p-5 text-center space-y-1 border-[#27272a] bg-[#121212]">
+        <div class="text-2xl sm:text-3xl font-bold text-[#f5a623] font-mono">Private</div>
+        <div class="text-[12px] text-[#a1a1aa] font-medium">Zero Position Logging</div>
+      </Card>
+    </div>
+
+    <!-- Core Pillars -->
+    <div class="space-y-8 text-[15px] text-[#a1a1aa] leading-relaxed">
+      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a]">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#0070f3]"></span>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#f4f4f5]">{t('features.title')}</h2>
+        </div>
+        <p>
+          {t('meta.homeDesc')}
+        </p>
+      </Card>
+
+      <!-- Technology & Open Source Attribution -->
+      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a]">
+        <h2 class="text-xl sm:text-2xl font-bold text-[#f4f4f5]">Stockfish Engine & Open Source</h2>
+        <p>
+          Next Move Chess is powered by the open-source Stockfish chess engine compiled to WebAssembly. Stockfish is licensed under the GNU General Public License (GPL v3).
+        </p>
+      </Card>
+
+      <!-- Engineering & Development by Shyamika AI -->
+      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a] bg-gradient-to-r from-[#121216] via-[#161622] to-[#121216]">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#00dfd8]"></span>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#f4f4f5]">Developed by Shyamika AI</h2>
+        </div>
+        <p>
+          Next Move Chess is developed and engineered by <a href="https://shyamikaai.com/" target="_blank" rel="noopener" class="text-[#00dfd8] hover:underline font-semibold">Shyamika AI</a>, an artificial intelligence research and digital innovation lab building modern web applications, AI computation tools, and high-performance browser experiences.
+        </p>
+      </Card>
+    </div>
+
+    <!-- CTA Section -->
+    <Card class="bg-gradient-to-br from-[#121212] via-[#151518] to-[#1a1a24] p-8 sm:p-10 text-center space-y-6 border-[#27272a]">
+      <div class="space-y-2">
+        <h3 class="text-2xl sm:text-3xl font-bold text-[#f4f4f5]">{t('cta.title')}</h3>
+        <p class="text-[14px] sm:text-base text-[#a1a1aa] max-w-xl mx-auto">
+          {t('cta.desc')}
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <Button href={translatePath('/chess-next-move')} variant="primary">
+          {t('cta.button')}
+        </Button>
+        <Button href={translatePath('/learn')} variant="secondary">
+          {t('homeLearn.viewAll')}
+        </Button>
+      </div>
+    </Card>
+  </div>
+</BaseLayout>

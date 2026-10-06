@@ -1,27 +1,36 @@
 ---
 import Card from '../ui/Card.astro';
 import Badge from '../ui/Badge.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 
 const comparisons = [
   {
-    feature: 'Mobile Usability',
-    legacy: 'Clunky desktop widgets squished onto mobile screens',
-    nextMove: 'Built from the ground up as a native mobile-first touch dock',
+    feature: t('benefits.r1Cap'),
+    legacy: t('benefits.r1Leg'),
+    nextMove: t('benefits.r1Next'),
   },
   {
-    feature: 'Ad Interruption',
-    legacy: 'Heavy banner ads, tracking scripts, and anti-adblock modals',
-    nextMove: 'Clean, distraction-free environment with instant rendering',
+    feature: t('benefits.r2Cap'),
+    legacy: t('benefits.r2Leg'),
+    nextMove: t('benefits.r2Next'),
   },
   {
-    feature: 'Engine Evaluation Meter',
-    legacy: 'Basic text scores or missing live bar charts',
-    nextMove: 'Real-time responsive centipawn meter and winning percentage indicator',
+    feature: t('benefits.r3Cap'),
+    legacy: t('benefits.r3Leg'),
+    nextMove: t('benefits.r3Next'),
   },
   {
-    feature: 'Position Setup & Palette',
-    legacy: 'Slow piece dragging and confusing castling controls',
-    nextMove: 'Tactile piece palette, castling toggles, and instant FEN sync',
+    feature: t('benefits.r4Cap'),
+    legacy: t('benefits.r4Leg'),
+    nextMove: t('benefits.r4Next'),
   },
 ];
 ---
@@ -29,12 +38,12 @@ const comparisons = [
 <section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0a]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
-      <Badge text="Why Next Move Chess" variant="mono" />
+      <Badge text={t('benefits.badge')} variant="mono" />
       <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
-        A Better Way to Calculate Moves
+        {t('benefits.title')}
       </h2>
       <p class="text-[15px] text-[#a1a1aa]">
-        Compare the next-generation experience against outdated, ad-heavy legacy calculators.
+        {t('benefits.desc')}
       </p>
     </div>
 
@@ -44,10 +53,10 @@ const comparisons = [
         <table class="w-full text-left text-sm border-collapse">
           <thead>
             <tr class="border-b border-[#27272a] bg-[#18181b]">
-              <th class="p-4 sm:p-5 text-[#f4f4f5] font-semibold text-[14px]">Capability</th>
-              <th class="p-4 sm:p-5 text-[#71717a] font-mono text-[13px] uppercase">Legacy Chess Calculators</th>
+              <th class="p-4 sm:p-5 text-[#f4f4f5] font-semibold text-[14px]">{t('benefits.thCapability')}</th>
+              <th class="p-4 sm:p-5 text-[#71717a] font-mono text-[13px] uppercase">{t('benefits.thLegacy')}</th>
               <th class="p-4 sm:p-5 text-[#00dfd8] font-mono text-[13px] uppercase bg-[#0070f3]/5 border-l border-[#27272a]">
-                Next Move Chess
+                {t('benefits.thNextMove')}
               </th>
             </tr>
           </thead>

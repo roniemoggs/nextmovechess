@@ -1,6 +1,16 @@
 ---
 import Button from '../ui/Button.astro';
 import Badge from '../ui/Badge.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
 ---
 
 <section class="w-full py-20 lg:py-28 bg-[#0a0a0a] relative overflow-hidden text-center">
@@ -8,23 +18,27 @@ import Badge from '../ui/Badge.astro';
   <div class="absolute inset-0 bg-mesh-gradient opacity-60 pointer-events-none"></div>
 
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
-    <Badge text="Start Winning More Games" variant="brand" />
+    <Badge text={t('cta.badge')} variant="brand" />
 
     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-[#f4f4f5] leading-tight">
-      Ready to Find Your <span class="text-gradient">Winning Next Move</span>?
+      {t('cta.title')}
     </h2>
 
     <p class="text-base sm:text-lg text-[#a1a1aa] max-w-xl mx-auto leading-relaxed">
-      Analyze your current board, eliminate blunders, and calculate winning candidate moves in real time.
+      {t('cta.desc')}
     </p>
 
     <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-      <Button href="/chess-next-move" variant="primary" class="w-full sm:w-auto shadow-[0_0_25px_rgba(255,255,255,0.2)]">
-        Launch Chess Tool Now →
+      <Button href={translatePath('/chess-next-move')} variant="primary" class="w-full sm:w-auto shadow-[0_0_25px_rgba(255,255,255,0.2)]">
+        {t('cta.button')}
       </Button>
-      <Button href="/learn" variant="secondary" class="w-full sm:w-auto">
-        Read Strategy Guides
+      <Button href={translatePath('/learn')} variant="secondary" class="w-full sm:w-auto">
+        {t('homeLearn.viewAll')}
       </Button>
+    </div>
+
+    <div class="text-[12px] font-mono text-[#71717a] pt-2">
+      {t('cta.note')}
     </div>
   </div>
 </section>

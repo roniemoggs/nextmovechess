@@ -1,0 +1,132 @@
+---
+import { languages, localesConfig, type SupportedLanguage } from '../../i18n/ui';
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+interface Props {
+  variant?: 'compact' | 'full';
+  class?: string;
+}
+
+const { variant = 'compact', class: className = '' } = Astro.props;
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentConfig = localesConfig[currentLang];
+const translatePath = useTranslatedPath(currentLang);
+const currentPath = Astro.url.pathname;
+---
+
+<div class={`relative inline-block text-left language-picker-container ${className}`}>
+  <!-- Trigger Button -->
+  <button
+    type="button"
+    class="lang-picker-toggle inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium text-[#a1a1aa] hover:text-[#f4f4f5] bg-[#141417] hover:bg-[#1f1f23] border border-[#27272a] transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#0070f3]"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Select Language"
+  >
+    <span class="text-[15px] leading-none" aria-hidden="true">{currentConfig.flag}</span>
+    <span class="font-medium text-[#f4f4f5]">{variant === 'full' ? currentConfig.label : currentLang.toUpperCase()}</span>
+    <svg class="w-3.5 h-3.5 text-[#71717a] transition-transform lang-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div
+    class="lang-picker-menu hidden absolute right-0 mt-2 w-56 rounded-xl bg-[#0f0f12] border border-[#27272a] shadow-2xl z-50 py-1.5 overflow-hidden backdrop-blur-md"
+    role="menu"
+    aria-orientation="vertical"
+  >
+    <div class="px-3 py-2 text-[11px] font-mono uppercase tracking-wider text-[#71717a] border-b border-[#27272a]/60">
+      Select Language / Idioma
+    </div>
+    
+    <div class="max-h-72 overflow-y-auto py-1 divide-y divide-[#27272a]/30">
+      {Object.entries(languages).map(([code, label]) => {
+        const langCode = code as SupportedLanguage;
+        const config = localesConfig[langCode];
+        const isSelected = currentLang === langCode;
+        const targetHref = translatePath(currentPath, langCode);
+
+        return (
+          <a
+            href={targetHref}
+            class={`flex items-center justify-between px-3.5 py-2.5 text-[13px] transition-colors ${
+              isSelected
+                ? 'bg-[#0070f3]/15 text-[#00dfd8] font-semibold'
+                : 'text-[#d4d4d8] hover:bg-[#18181c] hover:text-[#ffffff]'
+            }`}
+            role="menuitem"
+          >
+            <div class="flex items-center gap-2.5">
+              <span class="text-base" aria-hidden="true">{config.flag}</span>
+              <span>{label}</span>
+            </div>
+            {isSelected && (
+              <svg class="w-4 h-4 text-[#00dfd8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            )}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupLanguagePickers() {
+    const containers = document.querySelectorAll('.language-picker-container');
+
+    containers.forEach((container) => {
+      const toggle = container.querySelector('.lang-picker-toggle') as HTMLButtonElement | null;
+      const menu = container.querySelector('.lang-picker-menu') as HTMLElement | null;
+      const chevron = container.querySelector('.lang-chevron') as HTMLElement | null;
+
+      if (!toggle || !menu) return;
+
+      // Close menu helper
+      const closeMenu = () => {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        chevron?.classList.remove('rotate-180');
+      };
+
+      // Toggle click
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+          closeMenu();
+        } else {
+          // Close others
+          document.querySelectorAll('.lang-picker-menu').forEach((m) => m.classList.add('hidden'));
+          document.querySelectorAll('.lang-picker-toggle').forEach((t) => t.setAttribute('aria-expanded', 'false'));
+          document.querySelectorAll('.lang-chevron').forEach((c) => c.classList.remove('rotate-180'));
+
+          menu.classList.remove('hidden');
+          toggle.setAttribute('aria-expanded', 'true');
+          chevron?.classList.add('rotate-180');
+        }
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!container.contains(e.target as Node)) {
+          closeMenu();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeMenu();
+        }
+      });
+    });
+  }
+
+  // Run on page load & Astro page swaps
+  setupLanguagePickers();
+  document.addEventListener('astro:page-load', setupLanguagePickers);
+</script>

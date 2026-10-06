@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<BaseLayout
+  title={t('meta.contactTitle')}
+  description={t('meta.contactDesc')}
+  keywords={t('meta.homeKeywords')}
+  activePath={translatePath('/contact')}
+  lang={lang}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: t('nav.contact') },
+      ]}
+    />
+
+    <!-- Header Section -->
+    <header class="space-y-4 max-w-3xl">
+      <Badge text={t('nav.contact')} variant="brand" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
+        {t('faq.contactTitle')}
+      </h1>
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+        {t('faq.contactDesc')}
+      </p>
+    </header>
+
+    <!-- Content Card -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a] bg-[#121212]">
+        <h2 class="text-xl font-bold text-[#f4f4f5]">{t('nav.contact')} Next Move Chess</h2>
+        <p class="text-[14px] text-[#a1a1aa] leading-relaxed">
+          Email: <a href="mailto:support@nextmovechesss.com" class="text-[#00dfd8] hover:underline font-mono">support@nextmovechesss.com</a>
+        </p>
+        <p class="text-[13px] text-[#71717a]">
+          Response time: within 24–48 hours.
+        </p>
+      </Card>
+
+      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a] bg-[#121212]">
+        <h2 class="text-xl font-bold text-[#f4f4f5]">{t('nav.faq')}</h2>
+        <p class="text-[14px] text-[#a1a1aa] leading-relaxed">
+          {t('faq.desc')}
+        </p>
+        <Button href={translatePath('/faq')} variant="secondary">
+          {t('homeLearn.viewAll')}
+        </Button>
+      </Card>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,329 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+// Localized complete FAQ data
+const allFaqsData: Record<SupportedLanguage, Array<{ category: string; items: Array<{ q: string; a: string }> }>> = {
+  en: [
+    {
+      category: 'Finding & Calculating Next Chess Moves',
+      items: [
+        {
+          q: 'How do I find the best next move in chess?',
+          a: 'To find the best next move in chess, you can use our free Next Move Chess calculator. Simply set up your board position by dragging pieces, paste a FEN or PGN string, or make moves on the interactive board. The integrated Stockfish NNUE engine analyzes millions of variations per second to display the optimal candidate moves and centipawn evaluations.',
+        },
+        {
+          q: 'What is the best move in my chess position?',
+          a: 'The best move in your specific chess position depends on tactical dynamics (checks, captures, and threats) and strategic principles (king safety, piece activity, and pawn structure). Enter your board into Next Move Chess, and our AI chess engine will compute the highest-evaluating continuation for your exact position.',
+        },
+        {
+          q: 'What’s my next chess move?',
+          a: 'You can discover your next chess move instantly by pasting your game FEN or playing the position on the Next Move Chess interactive board. The engine immediately highlights the top candidate moves and visualizes the best continuation arrows.',
+        },
+        {
+          q: 'What is the best opening move in chess?',
+          a: 'The most popular and statistically successful opening moves in chess for White are 1.e4 (King’s Pawn) and 1.d4 (Queen’s Pawn), as both stake immediate claims in the center and open diagonals for bishops and the queen.',
+        },
+      ],
+    },
+    {
+      category: 'Chess Engines & Calculation Technology',
+      items: [
+        {
+          q: 'What is a chess engine?',
+          a: 'A chess engine is a specialized software program that analyzes chess positions, calculates millions of future move sequences using search algorithms (like minimax and alpha-beta pruning), and evaluates positional quality with numerical scores or neural networks.',
+        },
+        {
+          q: 'What is the strongest chess engine?',
+          a: 'Stockfish (specifically Stockfish NNUE) is widely acknowledged as the strongest chess engine in the world, with an estimated Elo rating exceeding 3500+ and numerous championships in the Top Chess Engine Championship (TCEC).',
+        },
+        {
+          q: 'What does the evaluation score (+1.5, -2.0, #3) mean?',
+          a: 'A positive score (+1.50) indicates White is leading by roughly 1.5 pawns in positional or material value. A negative score (-2.00) means Black has an advantage. A symbol like #4 represents a forced checkmate in 4 moves.',
+        },
+      ],
+    },
+    {
+      category: 'Chess AI & Fair Play',
+      items: [
+        {
+          q: 'Is this a chess AI?',
+          a: 'Yes, Next Move Chess features a modern chess AI powered by Stockfish’s Efficiently Updatable Neural Network (NNUE). The neural network evaluation was trained on billions of positions to evaluate subtle positional nuances with superhuman accuracy.',
+        },
+        {
+          q: 'Is using a chess AI to find moves cheating?',
+          a: 'Using a chess AI or engine to determine moves during a live competitive game against a human player is strictly considered cheating and violates fair-play rules on platforms like Chess.com and Lichess. However, using chess AI for post-game review, analysis, tactical puzzles, and opening preparation is 100% legal and recommended for improvement.',
+        },
+        {
+          q: 'Is this chess move calculator free to use?',
+          a: 'Yes, Next Move Chess is completely 100% free to use. There are no fees, accounts, credit cards, or paywalls required to analyze games and calculate candidate moves.',
+        },
+      ],
+    },
+  ],
+  'pt-br': [
+    {
+      category: 'Cálculo e Próximas Jogadas de Xadrez',
+      items: [
+        {
+          q: 'Como encontrar a melhor próxima jogada no xadrez?',
+          a: 'Para encontrar a melhor próxima jogada, monte sua posição no tabuleiro de xadrez do Next Move Chess ou cole o código FEN. A engine Stockfish NNUE avalia milhões de lances por segundo para exibir os melhores lances candidatos.',
+        },
+        {
+          q: 'Qual é o melhor lance de abertura no xadrez?',
+          a: '1.e4 (Peão do Rei) e 1.d4 (Peão da Dama) são estatisticamente as melhores jogadas iniciais de xadrez para as Brancas, garantindo o controle central.',
+        },
+        {
+          q: 'Qual é a melhor jogada na minha posição?',
+          a: 'A melhor jogada depende de fatores táticos e posicionais. Insira a posição no Next Move Chess para calcular a continuação ideal.',
+        },
+      ],
+    },
+    {
+      category: 'Engine Stockfish e Tecnologia de Xadrez',
+      items: [
+        {
+          q: 'O que é uma engine de xadrez?',
+          a: 'Uma engine de xadrez é um software avançado que avalia posições e calcula milhões de sequências de lances usando busca minimax e rede neural NNUE.',
+        },
+        {
+          q: 'Qual é a engine de xadrez mais forte?',
+          a: 'O Stockfish NNUE é reconhecido como a engine de xadrez mais forte do mundo, com rating Elo superior a 3500+.',
+        },
+        {
+          q: 'O que significa a pontuação de avaliação (+1.5, -2.0)?',
+          a: 'Uma pontuação positiva (+1.50) indica vantagem para as Brancas de cerca de 1,5 peões. Valores negativos favorecem as Negras.',
+        },
+      ],
+    },
+  ],
+  es: [
+    {
+      category: 'Cálculo y Siguiente Jugada de Ajedrez',
+      items: [
+        {
+          q: '¿Cómo encontrar el mejor siguiente movimiento en ajedrez?',
+          a: 'Coloca tu posición en el tablero de Next Move Chess o pega tu FEN. El motor Stockfish NNUE evaluará la posición y te mostrará las mejores jugadas de ajedrez.',
+        },
+        {
+          q: '¿Cuál es el mejor movimiento de apertura en ajedrez?',
+          a: '1.e4 y 1.d4 son las mejores jugadas de apertura en ajedrez para las blancas, facilitando el desarrollo rápido y el control central.',
+        },
+      ],
+    },
+    {
+      category: 'Motor de Ajedrez y Tecnología',
+      items: [
+        {
+          q: '¿Qué es un motor de ajedrez?',
+          a: 'Un motor de ajedrez es un programa informático que calcula secuencias de jugadas y evalúa posiciones con precisión milimétrica.',
+        },
+        {
+          q: '¿Cuál es el motor de ajedrez más potente?',
+          a: 'Stockfish NNUE es el motor de ajedrez más fuerte del mundo, con más de 3500 de rating Elo.',
+        },
+      ],
+    },
+  ],
+  fr: [
+    {
+      category: 'Calcul et Prochain Coup aux Échecs',
+      items: [
+        {
+          q: 'Comment trouver le meilleur prochain coup aux échecs ?',
+          a: 'Disposez vos pièces sur l’échiquier Next Move Chess ou collez un FEN. Le moteur Stockfish NNUE analyse la position pour vous donner les meilleurs coups candidats.',
+        },
+        {
+          q: 'Quel est le meilleur coup d’ouverture aux échecs ?',
+          a: '1.e4 et 1.d4 sont les meilleurs coups initiaux aux échecs pour les Blancs.',
+        },
+      ],
+    },
+    {
+      category: 'Moteur d’Échecs Stockfish',
+      items: [
+        {
+          q: 'Quel est le moteur d’échecs le plus fort ?',
+          a: 'Stockfish NNUE est universellement considéré comme le moteur d’échecs le plus puissant au monde (plus de 3500 Elo).',
+        },
+      ],
+    },
+  ],
+  de: [
+    {
+      category: 'Schachzug-Berechnung & Nächster Zug',
+      items: [
+        {
+          q: 'Wie finde ich den besten nächsten Schachzug?',
+          a: 'Baue die Stellung auf dem Next Move Chess-Brett auf oder füge einen FEN-Code ein. Die Stockfish NNUE-Engine zeigt dir die besten Züge.',
+        },
+        {
+          q: 'Was ist der beste Eröffnungszug im Schach?',
+          a: '1.e4 und 1.d4 sind statistisch die besten Eröffnungszüge im Schach für Weiß.',
+        },
+      ],
+    },
+  ],
+  ja: [
+    {
+      category: 'チェスの次の手と最善手計算',
+      items: [
+        {
+          q: 'チェスで次の最善手を見つけるにはどうすればよいですか？',
+          a: '盤上に駒を配置するかFENコードを貼り付けると、Stockfish NNUEエンジンが最善の手順を即座に計算して表示します。',
+        },
+        {
+          q: 'チェスで最強のエンジンは何ですか？',
+          a: 'Stockfish NNUEが世界最強のチェスエンジンであり、3500以上のEloレーティングを誇ります。',
+        },
+      ],
+    },
+  ],
+  tr: [
+    {
+      category: 'Satranç Hamle Hesaplama & En İyi Hamleler',
+      items: [
+        {
+          q: 'Satrançta en iyi sonraki hamleyi nasıl bulabilirim?',
+          a: 'Tahtaya taşları yerleştirin veya FEN kodunu yapıştırın. Stockfish NNUE satranç motoru en iyi hamle varyasyonlarını hesaplayıp sunar.',
+        },
+        {
+          q: 'Dünyanın en güçlü satranç motoru hangisidir?',
+          a: 'Stockfish NNUE, 3500+ üzeri Elo gücüyle dünyanın en iyi satranç motorudur.',
+        },
+      ],
+    },
+  ],
+  id: [
+    {
+      category: 'Kalkulasi Langkah Catur Berikutnya',
+      items: [
+        {
+          q: 'Bagaimana cara menemukan langkah catur terbaik berikutnya?',
+          a: 'Atur posisi di papan Next Move Chess atau tempel kode FEN. Mesin Stockfish NNUE akan mengevaluasi jutaan posisi untuk memberi tahu langkah terbaik.',
+        },
+        {
+          q: 'Apa mesin catur terkuat di dunia?',
+          a: 'Stockfish NNUE diakui sebagai mesin catur nomor satu di dunia dengan kekuatan di atas 3500+ Elo.',
+        },
+      ],
+    },
+  ],
+  ko: [
+    {
+      category: '체스 다음 수 및 최선의 수 계산',
+      items: [
+        {
+          q: '체스에서 다음 최선의 수를 어떻게 찾을 수 있나요?',
+          a: 'Next Move Chess 체스판에 기물을 배치하거나 FEN 코드를 입력하세요. Stockfish NNUE 엔진이 실시간으로 최적의 수를 계산합니다.',
+        },
+        {
+          q: '세계 최강의 체스 엔진은 무엇인가요?',
+          a: 'Stockfish NNUE는 3500 이상의 레이팅을 가진 세계 최강의 체스 엔진입니다.',
+        },
+      ],
+    },
+  ],
+};
+
+const currentSections = allFaqsData[lang] || allFaqsData.en;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: currentSections.flatMap((section) =>
+    section.items.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    }))
+  ),
+};
+---
+
+<BaseLayout
+  title={t('meta.faqTitle')}
+  description={t('meta.faqDesc')}
+  keywords={t('meta.homeKeywords')}
+  activePath={translatePath('/faq')}
+  schema={faqSchema}
+  lang={lang}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+    <!-- Breadcrumbs -->
+    <Breadcrumbs
+      items={[
+        { name: t('nav.faq') },
+      ]}
+    />
+
+    <!-- Header -->
+    <header class="space-y-4">
+      <Badge text={t('faq.badge')} variant="brand" />
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
+        {t('faq.title')}
+      </h1>
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+        {t('faq.desc')}
+      </p>
+    </header>
+
+    <!-- FAQ Categories -->
+    <div class="space-y-8">
+      {currentSections.map((section) => (
+        <div class="space-y-4">
+          <h2 class="text-xl font-bold text-[#f4f4f5] border-b border-[#27272a] pb-2">
+            {section.category}
+          </h2>
+          <div class="space-y-3">
+            {section.items.map((faq) => (
+              <Card class="p-5 sm:p-6">
+                <details class="group cursor-pointer">
+                  <summary class="flex items-center justify-between font-semibold text-[15px] text-[#f4f4f5] list-none">
+                    <span>{faq.q}</span>
+                    <span class="w-6 h-6 rounded-full bg-[#18181b] border border-[#27272a] flex items-center justify-center text-[#a1a1aa] group-open:rotate-180 transition-transform text-xs shrink-0 ml-4">
+                      ▼
+                    </span>
+                  </summary>
+                  <p class="mt-3 text-[14px] text-[#a1a1aa] leading-relaxed pt-3 border-t border-[#27272a]/60">
+                    {faq.a}
+                  </p>
+                </details>
+              </Card>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Contact Callout -->
+    <Card class="bg-gradient-to-br from-[#121212] to-[#18181b] p-8 text-center space-y-4 border-[#27272a]">
+      <h3 class="text-xl font-bold text-[#f4f4f5]">{t('faq.contactTitle')}</h3>
+      <p class="text-[14px] text-[#a1a1aa] max-w-md mx-auto">
+        {t('faq.contactDesc')}
+      </p>
+      <Button href={translatePath('/contact')} variant="secondary">
+        {t('faq.contactBtn')}
+      </Button>
+    </Card>
+  </div>
+</BaseLayout>

@@ -1,5 +1,16 @@
 ---
 import Logo from '../ui/Logo.astro';
+import LanguagePicker from '../ui/LanguagePicker.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
 
 const year = new Date().getFullYear();
 ---
@@ -9,13 +20,20 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
       <!-- Brand & Summary -->
       <div class="md:col-span-1 space-y-4">
-        <a href="/" class="focus:outline-none" aria-label="Next Move Chess Home">
+        <a href={translatePath('/')} class="focus:outline-none" aria-label="Next Move Chess Home">
           <Logo size="md" />
         </a>
         <p class="text-[13px] text-[#a1a1aa] leading-relaxed">
-          High-performance chess move calculator and tactical position evaluation powered by modern engine search.
+          {t('footer.summary')}
         </p>
-        <div class="text-[11px] font-mono text-[#71717a]">
+        
+        <!-- Language selector in footer -->
+        <div class="pt-2">
+          <div class="text-[11px] font-mono text-[#71717a] mb-1.5 uppercase tracking-wider">{t('nav.selectLanguage')}</div>
+          <LanguagePicker variant="full" />
+        </div>
+
+        <div class="text-[11px] font-mono text-[#71717a] pt-1">
           Domain: nextmovechesss.com
         </div>
       </div>
@@ -23,27 +41,27 @@ const year = new Date().getFullYear();
       <!-- Core Engine Tools -->
       <div class="space-y-3">
         <h4 class="text-[12px] font-mono font-medium uppercase tracking-wider text-[#a1a1aa]">
-          Chess Engine
+          {t('footer.engineTools')}
         </h4>
         <ul class="space-y-2 text-[13px]">
           <li>
-            <a href="/chess-next-move" class="text-[#f4f4f5] hover:text-[#00dfd8] transition-colors font-medium">
-              Next Move Chess Calculator
+            <a href={translatePath('/chess-next-move')} class="text-[#f4f4f5] hover:text-[#00dfd8] transition-colors font-medium">
+              {t('footer.calcTool')}
             </a>
           </li>
           <li>
-            <a href="/chess-next-move" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Chess Analysis Board
+            <a href={translatePath('/chess-next-move')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.analysisBoard')}
             </a>
           </li>
           <li>
-            <a href="/how-it-works" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Stockfish Engine Architecture
+            <a href={translatePath('/how-it-works')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.archLink')}
             </a>
           </li>
           <li>
-            <a href="/chess-next-move" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Best Chess Move Calculator
+            <a href={translatePath('/chess-next-move')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.bestCalcLink')}
             </a>
           </li>
         </ul>
@@ -52,32 +70,32 @@ const year = new Date().getFullYear();
       <!-- Strategy & Education -->
       <div class="space-y-3">
         <h4 class="text-[12px] font-mono font-medium uppercase tracking-wider text-[#a1a1aa]">
-          Learn & Guides
+          {t('footer.learnHeading')}
         </h4>
         <ul class="space-y-2 text-[13px]">
           <li>
-            <a href="/learn/how-to-find-the-best-move-in-chess" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Finding the Best Move
+            <a href={translatePath('/learn/how-to-find-the-best-move-in-chess')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.findBestMove')}
             </a>
           </li>
           <li>
-            <a href="/learn/chess-move-analyzer" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Position Evaluation Guide
+            <a href={translatePath('/learn/chess-move-analyzer')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.evalGuide')}
             </a>
           </li>
           <li>
-            <a href="/learn/how-chess-engines-work" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              How Chess Engines Work
+            <a href={translatePath('/learn/how-chess-engines-work')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.howEngineWorks')}
             </a>
           </li>
           <li>
-            <a href="/learn/chess-tactics-guide" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Essential Tactics Guide
+            <a href={translatePath('/learn/chess-tactics-guide')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.tacticsGuide')}
             </a>
           </li>
           <li>
-            <a href="/learn/chess-opening-principles" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              5 Golden Opening Rules
+            <a href={translatePath('/learn/chess-opening-principles')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.openingRules')}
             </a>
           </li>
         </ul>
@@ -86,32 +104,32 @@ const year = new Date().getFullYear();
       <!-- Platform & Legal -->
       <div class="space-y-3">
         <h4 class="text-[12px] font-mono font-medium uppercase tracking-wider text-[#a1a1aa]">
-          Product & Legal
+          {t('footer.productLegal')}
         </h4>
         <ul class="space-y-2 text-[13px]">
           <li>
-            <a href="/about" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              About Next Move Chess
+            <a href={translatePath('/about')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.aboutUs')}
             </a>
           </li>
           <li>
-            <a href="/faq" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Frequently Asked Questions
+            <a href={translatePath('/faq')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.faq')}
             </a>
           </li>
           <li>
-            <a href="/contact" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Support & Contact
+            <a href={translatePath('/contact')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.contact')}
             </a>
           </li>
           <li>
-            <a href="/privacy" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Privacy Policy
+            <a href={translatePath('/privacy')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.privacy')}
             </a>
           </li>
           <li>
-            <a href="/terms" class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
-              Terms of Service
+            <a href={translatePath('/terms')} class="text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors">
+              {t('footer.terms')}
             </a>
           </li>
         </ul>
@@ -121,12 +139,12 @@ const year = new Date().getFullYear();
     <!-- Bottom Bar -->
     <div class="mt-12 pt-6 border-t border-[#27272a] flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#71717a]">
       <div>
-        &copy; {year} Next Move Chess. All rights reserved.
+        &copy; {year} Next Move Chess. {t('footer.rights')}
       </div>
       <div class="flex items-center gap-6">
-        <a href="/privacy" class="hover:text-[#a1a1aa] transition-colors">Privacy</a>
-        <a href="/terms" class="hover:text-[#a1a1aa] transition-colors">Terms</a>
-        <a href="/contact" class="hover:text-[#a1a1aa] transition-colors">Contact</a>
+        <a href={translatePath('/privacy')} class="hover:text-[#a1a1aa] transition-colors">{t('footer.privacy')}</a>
+        <a href={translatePath('/terms')} class="hover:text-[#a1a1aa] transition-colors">{t('footer.terms')}</a>
+        <a href={translatePath('/contact')} class="hover:text-[#a1a1aa] transition-colors">{t('footer.contact')}</a>
         <span class="font-mono text-[11px] text-[#00dfd8]">nextmovechesss.com</span>
       </div>
     </div>

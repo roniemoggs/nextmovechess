@@ -1,29 +1,49 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ChessToolContainer from '../components/chess/ChessToolContainer.astro';
-import Card from '../components/ui/Card.astro';
-import Button from '../components/ui/Button.astro';
-import { useTranslations, useTranslatedPath } from '../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ChessEngineTool from '../../components/ChessEngineTool';
+import Card from '../../components/ui/Card.astro';
+import Button from '../../components/ui/Button.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const t = useTranslations('en');
-const translatePath = useTranslatedPath('en');
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <BaseLayout
   title={t('meta.toolTitle')}
   description={t('meta.toolDesc')}
   keywords={t('meta.toolKeywords')}
-  activePath="/chess-next-move"
+  activePath={translatePath('/tool')}
   isToolPage={true}
-  lang="en"
+  lang={lang}
 >
   <div class="w-full flex-1 flex flex-col justify-start py-4 sm:py-6">
-    <!-- Main Tool Container -->
-    <ChessToolContainer />
+    <ChessEngineTool client:only="react" lang={lang}>
+      <div slot="fallback" class="w-full max-w-5xl mx-auto min-h-[580px] bg-[#0c0c0e] border border-[#27272a] rounded-[16px] p-6 sm:p-8 flex flex-col items-center justify-center space-y-4">
+        <div class="w-14 h-14 rounded-2xl bg-[#141419] border border-[#27272a] flex items-center justify-center text-[#00dfd8] shadow-inner">
+          <svg class="animate-spin h-7 w-7 text-[#00dfd8]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        </div>
+        <div class="text-center space-y-1">
+          <div class="text-[16px] font-bold text-[#f4f4f5]">{t('chessTool.loadingTitle')}</div>
+          <div class="text-[13px] text-[#71717a] font-mono">{t('chessTool.loadingSubtitle')}</div>
+        </div>
+      </div>
+    </ChessEngineTool>
 
     <!-- Helpful Instructions & FAQs Accordion below tool -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16 w-full space-y-8">
-      
       <!-- 3-Column Tool Guide -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card padding="md" class="space-y-2">

@@ -1,21 +1,30 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
-import Card from '../components/ui/Card.astro';
-import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
-import { useTranslations, useTranslatedPath } from '../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const t = useTranslations('en');
-const translatePath = useTranslatedPath('en');
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <BaseLayout
   title={t('meta.howTitle')}
   description={t('meta.howDesc')}
   keywords={t('meta.homeKeywords')}
-  activePath="/how-it-works"
-  lang="en"
+  activePath={translatePath('/how-it-works')}
+  lang={lang}
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
     <!-- Breadcrumbs -->

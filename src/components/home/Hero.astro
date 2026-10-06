@@ -1,5 +1,14 @@
 ---
 import ChessToolContainer from '../chess/ChessToolContainer.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 ---
 
 <section class="relative w-full overflow-hidden pt-4 pb-12 sm:pt-6 sm:pb-16 border-b border-[#27272a]/60 bg-mesh-gradient">
@@ -8,35 +17,35 @@ import ChessToolContainer from '../chess/ChessToolContainer.astro';
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
     
-    <!-- Compact Title -->
+    <!-- Compact Title with Target Keyword -->
     <div class="text-center max-w-3xl mb-4 sm:mb-6">
       <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-[#f4f4f5] leading-tight">
-        Calculate the <span class="text-gradient">Best Next Move</span> in Any Position
+        {t('hero.titlePre')}<span class="text-gradient">{t('hero.titleHighlight')}</span>{t('hero.titlePost')}
       </h1>
     </div>
 
     <!-- The Chess Tool: First Thing Above The Fold -->
     <div class="w-full">
-      <ChessToolContainer isEmbedded={true} />
+      <ChessToolContainer isEmbedded={true} lang={currentLang} />
     </div>
 
     <!-- Trust & Telemetry Strip below tool -->
     <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl w-full text-center border border-[#27272a]/60 py-3.5 px-4 bg-[#0a0a0a]/60 backdrop-blur-sm rounded-[12px]">
       <div>
-        <div class="text-[16px] sm:text-lg font-bold text-[#f4f4f5] font-mono">Stockfish NNUE</div>
-        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">Engine Power</div>
+        <div class="text-[16px] sm:text-lg font-bold text-[#f4f4f5] font-mono">{t('hero.statEngine')}</div>
+        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">{t('hero.statEngineDesc')}</div>
       </div>
       <div>
-        <div class="text-[16px] sm:text-lg font-bold text-[#00dfd8] font-mono">&lt; 0.2s</div>
-        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">Fast Search</div>
+        <div class="text-[16px] sm:text-lg font-bold text-[#00dfd8] font-mono">{t('hero.statSpeed')}</div>
+        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">{t('hero.statSpeedDesc')}</div>
       </div>
       <div>
-        <div class="text-[16px] sm:text-lg font-bold text-[#f4f4f5] font-mono">FEN & PGN</div>
-        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">Instant Import</div>
+        <div class="text-[16px] sm:text-lg font-bold text-[#f4f4f5] font-mono">{t('hero.statImport')}</div>
+        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">{t('hero.statImportDesc')}</div>
       </div>
       <div>
-        <div class="text-[16px] sm:text-lg font-bold text-[#10b981] font-mono">100% Free</div>
-        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">Zero Ads</div>
+        <div class="text-[16px] sm:text-lg font-bold text-[#10b981] font-mono">{t('hero.statFree')}</div>
+        <div class="text-[10px] font-mono text-[#71717a] uppercase tracking-wider">{t('hero.statFreeDesc')}</div>
       </div>
     </div>
 

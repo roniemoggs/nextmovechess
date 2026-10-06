@@ -1,20 +1,29 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/home/Hero.astro';
-import HowItWorks from '../components/home/HowItWorks.astro';
-import Features from '../components/home/Features.astro';
-import Benefits from '../components/home/Benefits.astro';
-import SeoGuide from '../components/home/SeoGuide.astro';
-import FAQSection from '../components/home/FAQSection.astro';
-import CTASection from '../components/home/CTASection.astro';
-import ArticleCard from '../components/learn/ArticleCard.astro';
-import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/home/Hero.astro';
+import HowItWorks from '../../components/home/HowItWorks.astro';
+import Features from '../../components/home/Features.astro';
+import Benefits from '../../components/home/Benefits.astro';
+import SeoGuide from '../../components/home/SeoGuide.astro';
+import FAQSection from '../../components/home/FAQSection.astro';
+import CTASection from '../../components/home/CTASection.astro';
+import ArticleCard from '../../components/learn/ArticleCard.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
 import { getCollection } from 'astro:content';
-import { useTranslations, useTranslatedPath } from '../i18n/utils';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
 
-const t = useTranslations('en');
-const translatePath = useTranslatedPath('en');
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const articles = await getCollection('learn');
 const featuredArticles = articles.slice(0, 3);
@@ -24,23 +33,23 @@ const featuredArticles = articles.slice(0, 3);
   title={t('meta.homeTitle')}
   description={t('meta.homeDesc')}
   keywords={t('meta.homeKeywords')}
-  activePath="/"
-  lang="en"
+  activePath={translatePath('/')}
+  lang={lang}
 >
-  <!-- Hero with Integrated Tool Preview -->
-  <Hero lang="en" />
+  <!-- Hero with Integrated Tool Preview in Target Language -->
+  <Hero lang={lang} />
 
   <!-- 3-Step Process -->
-  <HowItWorks lang="en" />
+  <HowItWorks lang={lang} />
 
   <!-- Features Grid -->
-  <Features lang="en" />
+  <Features lang={lang} />
 
   <!-- Competitive Comparison -->
-  <Benefits lang="en" />
+  <Benefits lang={lang} />
 
-  <!-- In-Depth 1500+ Word SEO Guide & Deep-Dive Analysis -->
-  <SeoGuide lang="en" />
+  <!-- In-Depth SEO Guide & Deep-Dive Analysis -->
+  <SeoGuide lang={lang} />
 
   <!-- Educational Guides Section -->
   <section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0a0a0a]">
@@ -70,7 +79,6 @@ const featuredArticles = articles.slice(0, 3);
             readTime={article.data.readTime}
             pubDate={article.data.pubDate}
             featured={article.data.featured}
-            lang="en"
           />
         ))}
       </div>
@@ -78,8 +86,8 @@ const featuredArticles = articles.slice(0, 3);
   </section>
 
   <!-- FAQ Section -->
-  <FAQSection lang="en" />
+  <FAQSection lang={lang} />
 
   <!-- Final CTA -->
-  <CTASection lang="en" />
+  <CTASection lang={lang} />
 </BaseLayout>

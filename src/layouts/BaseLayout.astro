@@ -1,6 +1,9 @@
 ---
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
+import { getLangFromUrl, getLocaleConfig, getAlternateHreflangLinks, useTranslations, useTranslatedPath } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+import globalStyles from '../styles/global.css?url';
 
 interface Props {
   title?: string;
@@ -14,19 +17,25 @@ interface Props {
   schema?: Record<string, any> | Array<Record<string, any>>;
   noindex?: boolean;
   robots?: string;
+  lang?: SupportedLanguage;
 }
 
-const DEFAULT_TITLE = 'Next Move Chess - Best Chess Move Calculator & Online Engine';
-const DEFAULT_DESCRIPTION = 'Calculate the best next move in any position with Next Move Chess. Powered by Stockfish chess engine online, interactive chess analysis board, FEN import, and master candidate move evaluations.';
-const DEFAULT_KEYWORDS = 'Next Move Chess, chess ai, next chess move, chess next move, chess engine, chess engine online, stockfish chess engine, next move chess calculator, chess next move calculator, chess analysis board, chess moves, best opening chess moves, chess move calculator, best chess move calculator, chess game analyzer, ai chess engine';
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const localeConfig = getLocaleConfig(currentLang);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
+
 const SITE_URL = 'https://nextmovechesss.com';
+const DEFAULT_TITLE = t('meta.homeTitle');
+const DEFAULT_DESCRIPTION = t('meta.homeDesc');
+const DEFAULT_KEYWORDS = t('meta.homeKeywords');
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 
 const {
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   keywords = DEFAULT_KEYWORDS,
-  activePath = '/',
+  activePath = Astro.url.pathname,
   canonical = `${SITE_URL}${activePath === '/' ? '' : activePath}`,
   isToolPage = false,
   ogImage = DEFAULT_OG_IMAGE,
@@ -39,33 +48,37 @@ const {
 const fullTitle = title.includes('Next Move Chess') ? title : `${title} | Next Move Chess`;
 const resolvedOgImage = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
 
-// Core Schema.org structured data
+// Generate alternate hreflang tags for all supported languages + x-default
+const hreflangLinks = getAlternateHreflangLinks(activePath, SITE_URL);
+
+// Core Schema.org structured data localized
 const defaultWebsiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Next Move Chess',
-  alternateName: ['NextMoveChess', 'Next Move Chess Calculator', 'Next Chess Move', 'Next Move Chess AI', 'Chess AI'],
-  url: SITE_URL,
-  description: DEFAULT_DESCRIPTION,
-  inLanguage: 'en-US',
+  name: `Next Move Chess (${localeConfig.chessKeyword})`,
+  alternateName: ['NextMoveChess', `${localeConfig.chessKeyword} Next Move`, 'Next Move Chess Calculator', 'Chess AI'],
+  url: `${SITE_URL}${currentLang === 'en' ? '' : `/${currentLang}`}`,
+  description: description,
+  inLanguage: localeConfig.htmlLang,
 };
 
 const defaultSoftwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Next Move Chess Calculator',
+  name: `Next Move Chess Calculator (${localeConfig.chessKeyword})`,
   applicationCategory: 'GameApplication',
   operatingSystem: 'All',
   browserRequirements: 'Requires JavaScript and HTML5 support',
-  url: `${SITE_URL}/chess-next-move`,
-  description: 'Free online chess move calculator and analysis board powered by Stockfish NNUE chess AI engine.',
+  url: `${SITE_URL}${translatePath('/chess-next-move')}`,
+  description: description,
+  inLanguage: localeConfig.htmlLang,
   offers: {
     '@type': 'Offer',
     price: '0',
     priceCurrency: 'USD',
   },
   featureList: [
-    'Stockfish NNUE Chess Engine & Chess AI Online',
+    `Stockfish NNUE ${localeConfig.chessKeyword} Engine Online`,
     'Real-time Centipawn Evaluation Bar',
     'Multi-PV Candidate Move Suggestions',
     'Interactive Chess Analysis Board with Drag & Drop',
@@ -80,7 +93,7 @@ const structuredData = schema
 ---
 
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang={localeConfig.htmlLang} class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -101,6 +114,11 @@ const structuredData = schema
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="robots" content={robots} />
 
+    <!-- Hreflang Tags for Multi-Language SEO -->
+    {hreflangLinks.map((item) => (
+      <link rel="alternate" hreflang={item.hreflang} href={item.href} />
+    ))}
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
@@ -112,8 +130,8 @@ const structuredData = schema
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="675" />
     <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:alt" content="Next Move Chess - Best Chess Move Calculator & Online Engine" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:alt" content={`Next Move Chess - Best ${localeConfig.chessKeyword} Move Calculator`} />
+    <meta property="og:locale" content={localeConfig.ogLocale} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -121,14 +139,14 @@ const structuredData = schema
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
-    <meta name="twitter:image:alt" content="Next Move Chess - Best Chess Move Calculator & Online Engine" />
+    <meta name="twitter:image:alt" content={`Next Move Chess - Best ${localeConfig.chessKeyword} Move Calculator`} />
 
     <!-- Structured Data (JSON-LD) -->
     {structuredData.map((item) => (
       <script type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
 
-    <!-- Google Fonts: Inter & JetBrains Mono as crisp Geist fallbacks -->
+    <!-- Global Fonts: Geist & Geist Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -136,27 +154,25 @@ const structuredData = schema
       rel="stylesheet"
     />
 
-    <!-- Global Styles & Tailwind CSS v4 -->
-    <style is:global>
-      @import "../styles/global.css";
-    </style>
+    <!-- Tailwind CSS Stylesheet -->
+    <link rel="stylesheet" href={globalStyles} />
   </head>
   <body class="bg-[#0a0a0a] text-[#f4f4f5] min-h-screen flex flex-col selection:bg-[#0070f3] selection:text-white">
-    <Navbar activePath={activePath} />
+    <Navbar activePath={activePath} lang={currentLang} />
 
     <main class={`flex-1 flex flex-col ${isToolPage ? 'w-full' : ''}`}>
       <slot />
     </main>
 
-    {!isToolPage && <Footer />}
+    {!isToolPage && <Footer lang={currentLang} />}
     {isToolPage && (
       <footer class="border-t border-[#27272a] bg-[#0a0a0a] py-4 px-4 text-center text-[12px] text-[#71717a]">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>&copy; {new Date().getFullYear()} Next Move Chess — High-Performance Position Calculator</span>
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span>&copy; {new Date().getFullYear()} Next Move Chess — {t('footer.subText')}</span>
           <div class="flex items-center gap-4">
-            <a href="/how-it-works" class="hover:text-[#f4f4f5] transition-colors">How it works</a>
-            <a href="/learn" class="hover:text-[#f4f4f5] transition-colors">Guides</a>
-            <a href="/faq" class="hover:text-[#f4f4f5] transition-colors">FAQ</a>
+            <a href={translatePath('/how-it-works')} class="hover:text-[#f4f4f5] transition-colors">{t('nav.howItWorks')}</a>
+            <a href={translatePath('/learn')} class="hover:text-[#f4f4f5] transition-colors">{t('nav.learn')}</a>
+            <a href={translatePath('/faq')} class="hover:text-[#f4f4f5] transition-colors">{t('nav.faq')}</a>
           </div>
         </div>
       </footer>

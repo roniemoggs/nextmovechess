@@ -1,37 +1,46 @@
 ---
 import Card from '../ui/Card.astro';
 import Badge from '../ui/Badge.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import type { SupportedLanguage } from '../../i18n/ui';
+
+interface Props {
+  lang?: SupportedLanguage;
+}
+
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 
 const features = [
   {
-    title: 'Stockfish NNUE Neural Engine',
-    desc: 'Runs high-depth neural evaluation natively in your browser via WebAssembly for lightning-fast answers.',
-    badge: 'Engine',
+    title: t('features.f1Title'),
+    desc: t('features.f1Desc'),
+    badge: t('features.f1Badge'),
   },
   {
-    title: 'Mobile-First Tactile Controls',
-    desc: 'Engineered specifically for smartphone screens with large touch targets, thumb docks, and swipeable controls.',
-    badge: 'Mobile UX',
+    title: t('features.f2Title'),
+    desc: t('features.f2Desc'),
+    badge: t('features.f2Badge'),
   },
   {
-    title: 'Live Centipawn Evaluation Bar',
-    desc: 'Instant visual meter shows who is winning and highlights sudden advantage shifts or blunder refutations.',
-    badge: 'Evaluation',
+    title: t('features.f3Title'),
+    desc: t('features.f3Desc'),
+    badge: t('features.f3Badge'),
   },
   {
-    title: 'Multi-Line Candidate Suggestions',
-    desc: 'Compare the top 3 alternative variations side-by-side to understand why intuitive moves fail.',
-    badge: 'Multi-PV',
+    title: t('features.f4Title'),
+    desc: t('features.f4Desc'),
+    badge: t('features.f4Badge'),
   },
   {
-    title: 'Instant FEN & PGN Sync',
-    desc: 'Copy and paste position strings with one tap from Chess.com, Lichess, or digital game records.',
-    badge: 'Portability',
+    title: t('features.f5Title'),
+    desc: t('features.f5Desc'),
+    badge: t('features.f5Badge'),
   },
   {
-    title: 'Zero Ads & Zero Distractions',
-    desc: 'Clean, professional workspace with no disruptive popups, third-party banners, or anti-adblock modals.',
-    badge: 'Clean SaaS',
+    title: t('features.f6Title'),
+    desc: t('features.f6Desc'),
+    badge: t('features.f6Badge'),
   },
 ];
 ---
@@ -39,12 +48,12 @@ const features = [
 <section class="w-full py-16 lg:py-24 border-b border-[#27272a]/60 bg-[#0c0c0e]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
-      <Badge text="Built for Speed & Accuracy" variant="brand" />
+      <Badge text={t('features.badge')} variant="brand" />
       <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
-        Engineered for Modern Chess Players
+        {t('features.title')}
       </h2>
       <p class="text-[15px] text-[#a1a1aa]">
-        Everything you need to analyze sharp tactical positions and improve your calculation depth.
+        {t('features.desc')}
       </p>
     </div>
 

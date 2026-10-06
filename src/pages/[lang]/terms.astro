@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
+import { useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  const targetLocales = Object.keys(languages).filter((l) => l !== defaultLang);
+  return targetLocales.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang } = Astro.params as { lang: SupportedLanguage };
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<BaseLayout
+  title={t('meta.termsTitle')}
+  description="Next Move Chess Terms of Service. Review the terms governing the use of our chess move calculator and engine tools."
+  activePath={translatePath('/terms')}
+  lang={lang}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-10">
+    <Breadcrumbs
+      items={[
+        { name: t('footer.terms') },
+      ]}
+    />
+
+    <header class="space-y-4">
+      <Badge text="Legal" variant="mono" />
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#f4f4f5]">
+        {t('footer.terms')}
+      </h1>
+      <p class="text-sm text-[#71717a] font-mono">
+        Last updated: October 2026
+      </p>
+    </header>
+
+    <Card class="p-6 sm:p-8 space-y-6 text-[#a1a1aa] leading-relaxed text-[15px]">
+      <h2 class="text-xl font-bold text-[#f4f4f5]">1. Acceptance of Terms</h2>
+      <p>
+        By accessing or using Next Move Chess, you agree to comply with these terms. The service is provided "as is" for chess education, training, and tactical calculation.
+      </p>
+
+      <h2 class="text-xl font-bold text-[#f4f4f5]">2. Fair Play Commitment</h2>
+      <p>
+        Next Move Chess is intended strictly for study, training, puzzle solving, and post-game analysis. Users must not use the tool to obtain an unfair advantage in live competitive matches against human opponents on platforms with anti-cheating policies.
+      </p>
+    </Card>
+  </div>
+</BaseLayout>

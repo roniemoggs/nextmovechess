@@ -1,4 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for Next Move Chess (https://nextmovechesss.com)
+
 User-agent: *
 Allow: /
+Disallow: /404
+Disallow: /500
 
+# Sitemaps
 Sitemap: https://nextmovechesss.com/sitemap-index.xml
+Sitemap: https://nextmovechesss.com/sitemap.xml

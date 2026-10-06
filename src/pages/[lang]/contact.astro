@@ -1,9 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/layout/Breadcrumbs.astro';
-import Card from '../../components/ui/Card.astro';
-import Badge from '../../components/ui/Badge.astro';
-import Button from '../../components/ui/Button.astro';
 import { languages, defaultLang, type SupportedLanguage } from '../../i18n/ui';
 import { useTranslations, useTranslatedPath } from '../../i18n/utils';
 
@@ -20,52 +17,85 @@ const translatePath = useTranslatedPath(lang);
 ---
 
 <BaseLayout
-  title={t('meta.contactTitle')}
-  description={t('meta.contactDesc')}
+  title={`${t('nav.contact')} - Next Move Chess`}
+  description="Corrections, engine evaluation discrepancies, and bug reports are all welcome. Contact Next Move Chess support at support@nextmovechesss.com."
   keywords={t('meta.homeKeywords')}
   activePath={translatePath('/contact')}
   lang={lang}
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full">
     <!-- Breadcrumbs -->
-    <Breadcrumbs
-      items={[
-        { name: t('nav.contact') },
-      ]}
-    />
+    <div class="mb-8">
+      <Breadcrumbs
+        items={[
+          { name: t('nav.contact') },
+        ]}
+      />
+    </div>
 
-    <!-- Header Section -->
-    <header class="space-y-4 max-w-3xl">
-      <Badge text={t('nav.contact')} variant="brand" />
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
-        {t('faq.contactTitle')}
+    <!-- Main Header -->
+    <div class="space-y-6">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-[#f4f4f5]">
+        {t('nav.contact')}
       </h1>
-      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
-        {t('faq.contactDesc')}
+
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-2xl">
+        Corrections, engine evaluation discrepancies, wrong matches and bug reports are all welcome — reports of positions it consistently gets wrong are the most useful thing you can send.
       </p>
-    </header>
 
-    <!-- Content Card -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a] bg-[#121212]">
-        <h2 class="text-xl font-bold text-[#f4f4f5]">{t('nav.contact')} Next Move Chess</h2>
-        <p class="text-[14px] text-[#a1a1aa] leading-relaxed">
-          Email: <a href="mailto:support@nextmovechesss.com" class="text-[#00dfd8] hover:underline font-mono">support@nextmovechesss.com</a>
-        </p>
-        <p class="text-[13px] text-[#71717a]">
-          Response time: within 24–48 hours.
-        </p>
-      </Card>
+      <!-- Email Card Box -->
+      <div class="mt-6 rounded-2xl bg-[#121214] border border-[#27272a] p-5 sm:p-6 shadow-sm hover:border-[#3f3f46] transition-colors flex items-center justify-between gap-4">
+        <div class="text-[15px] sm:text-base text-[#e4e4e7] flex items-center gap-2 flex-wrap">
+          <span class="text-[#a1a1aa]">Email:</span>
+          <a
+            href="mailto:support@nextmovechesss.com"
+            class="font-mono text-[#f4f4f5] hover:text-[#00dfd8] transition-colors underline-offset-4 hover:underline"
+          >
+            support@nextmovechesss.com
+          </a>
+        </div>
 
-      <Card class="p-6 sm:p-8 space-y-4 border-[#27272a] bg-[#121212]">
-        <h2 class="text-xl font-bold text-[#f4f4f5]">{t('nav.faq')}</h2>
-        <p class="text-[14px] text-[#a1a1aa] leading-relaxed">
-          {t('faq.desc')}
-        </p>
-        <Button href={translatePath('/faq')} variant="secondary">
-          {t('homeLearn.viewAll')}
-        </Button>
-      </Card>
+        <button
+          id="copy-email-btn"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-[#a1a1aa] bg-[#18181b] border border-[#27272a] hover:text-white hover:border-[#3f3f46] hover:bg-[#27272a] transition-all cursor-pointer flex-shrink-0"
+          title="Copy email to clipboard"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copy-text">Copy</span>
+        </button>
+      </div>
+
+      <p class="text-xs sm:text-sm text-[#71717a] pt-1">
+        We typically respond within 24–48 hours. Feedback on moves, board interactions, and engine accuracy helps us improve.
+      </p>
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  const copyBtn = document.getElementById('copy-email-btn');
+  const copyText = document.getElementById('copy-text');
+  const email = 'support@nextmovechesss.com';
+
+  if (copyBtn && copyText) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        copyText.textContent = 'Copied!';
+        copyBtn.classList.add('text-[#00dfd8]', 'border-[#00dfd8]/40');
+        setTimeout(() => {
+          copyText.textContent = 'Copy';
+          copyBtn.classList.remove('text-[#00dfd8]', 'border-[#00dfd8]/40');
+        }, 2000);
+      } catch (e) {
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyText.textContent = 'Copy';
+        }, 2000);
+      }
+    });
+  }
+</script>

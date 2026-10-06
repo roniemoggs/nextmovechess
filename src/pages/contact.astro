@@ -1,15 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
-import Card from '../components/ui/Card.astro';
-import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
 
 const contactSchema = {
   '@context': 'https://schema.org',
   '@type': 'ContactPage',
-  name: 'Contact Next Move Chess Support & Feedback',
-  description: 'Get in touch with the Next Move Chess team for engine feedback, bug reports, feature suggestions, and general inquiries.',
+  name: 'Contact Next Move Chess',
+  description: 'Contact Next Move Chess support and development team for corrections, bug reports, engine feedback, and feature requests.',
   url: 'https://nextmovechesss.com/contact',
   mainEntity: {
     '@type': 'Organization',
@@ -26,203 +23,86 @@ const contactSchema = {
 ---
 
 <BaseLayout
-  title="Contact Us - Next Move Chess Support & Feedback"
-  description="Get in touch with Next Move Chess. Send feature requests, bug reports, engine feedback, or general inquiries to our development team."
-  keywords="contact next move chess, chess engine support, chess move calculator feedback, report chess bug"
+  title="Contact - Next Move Chess"
+  description="Corrections, engine evaluation discrepancies, and bug reports are all welcome. Contact Next Move Chess support at support@nextmovechesss.com."
+  keywords="contact next move chess, chess support, bug reports, engine feedback"
   activePath="/contact"
   schema={contactSchema}
 >
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 w-full space-y-12">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 w-full">
     <!-- Breadcrumbs -->
-    <Breadcrumbs
-      items={[
-        { name: 'Contact Us' },
-      ]}
-    />
+    <div class="mb-8">
+      <Breadcrumbs
+        items={[
+          { name: 'Contact' },
+        ]}
+      />
+    </div>
 
-    <!-- Header Section -->
-    <header class="space-y-4 max-w-3xl">
-      <Badge text="Get in Touch" variant="brand" />
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#f4f4f5] leading-tight">
-        We'd Love to Hear From You
+    <!-- Main Header -->
+    <div class="space-y-6">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-[#f4f4f5]">
+        Contact
       </h1>
-      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
-        Have a feature request, spotted a chess engine evaluation discrepancy, or want to say hello? Send us a message and our team will get back to you promptly.
+
+      <p class="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-2xl">
+        Corrections, engine evaluation discrepancies, wrong matches and bug reports are all welcome — reports of positions it consistently gets wrong are the most useful thing you can send.
       </p>
-    </header>
 
-    <!-- Two-Column Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <!-- Left Column: Contact Methods & FAQ Shortcut -->
-      <div class="lg:col-span-5 space-y-6">
-        <!-- Direct Email Card -->
-        <Card class="p-6 space-y-4 border-[#27272a] bg-[#121212]">
-          <div class="w-10 h-10 rounded-lg bg-[#0070f3]/10 border border-[#0070f3]/20 flex items-center justify-center text-[#00dfd8]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <div class="space-y-1">
-            <h3 class="text-lg font-bold text-[#f4f4f5]">Direct Support Email</h3>
-            <p class="text-[13px] text-[#a1a1aa]">
-              For detailed bug reports or partnership inquiries:
-            </p>
-            <a href="mailto:support@nextmovechesss.com" class="inline-block text-[#00dfd8] font-mono text-sm hover:underline pt-1">
-              support@nextmovechesss.com
-            </a>
-          </div>
-          <div class="text-[12px] text-[#71717a] font-mono pt-2 border-t border-[#27272a] flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
-            Average response time: &lt; 24-48 hours
-          </div>
-        </Card>
+      <!-- Email Card Box -->
+      <div class="mt-6 rounded-2xl bg-[#121214] border border-[#27272a] p-5 sm:p-6 shadow-sm hover:border-[#3f3f46] transition-colors flex items-center justify-between gap-4">
+        <div class="text-[15px] sm:text-base text-[#e4e4e7] flex items-center gap-2 flex-wrap">
+          <span class="text-[#a1a1aa]">Email:</span>
+          <a
+            href="mailto:support@nextmovechesss.com"
+            id="email-link"
+            class="font-mono text-[#f4f4f5] hover:text-[#00dfd8] transition-colors underline-offset-4 hover:underline"
+          >
+            support@nextmovechesss.com
+          </a>
+        </div>
 
-        <!-- Quick FAQs Box -->
-        <Card class="p-6 space-y-4 border-[#27272a] bg-[#121212]">
-          <div class="flex items-center justify-between">
-            <h3 class="text-base font-bold text-[#f4f4f5]">Frequently Asked</h3>
-            <a href="/faq" class="text-xs text-[#00dfd8] hover:underline">View All FAQs →</a>
-          </div>
-          
-          <div class="space-y-3 text-[13px]">
-            <div class="space-y-1 border-b border-[#27272a]/60 pb-3">
-              <div class="font-medium text-[#f4f4f5]">Is Next Move Chess free to use?</div>
-              <p class="text-[#a1a1aa]">Yes, 100% free with unlimited analysis and full engine depths without registration.</p>
-            </div>
-            <div class="space-y-1 border-b border-[#27272a]/60 pb-3">
-              <div class="font-medium text-[#f4f4f5]">Why does the engine run locally?</div>
-              <p class="text-[#a1a1aa]">It runs via WebAssembly inside your browser for zero latency and total position privacy.</p>
-            </div>
-            <div class="space-y-1">
-              <div class="font-medium text-[#f4f4f5]">Can I paste custom FEN / PGN?</div>
-              <p class="text-[#a1a1aa]">Yes, simply paste any standard FEN string or drag pieces onto the board directly.</p>
-            </div>
-          </div>
-        </Card>
+        <button
+          id="copy-email-btn"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-[#a1a1aa] bg-[#18181b] border border-[#27272a] hover:text-white hover:border-[#3f3f46] hover:bg-[#27272a] transition-all cursor-pointer flex-shrink-0"
+          title="Copy email to clipboard"
+        >
+          <svg id="copy-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copy-text">Copy</span>
+        </button>
       </div>
 
-      <!-- Right Column: Interactive Contact Form -->
-      <div class="lg:col-span-7">
-        <Card class="p-6 sm:p-8 space-y-6 border-[#27272a] bg-[#121212]">
-          <div class="space-y-1">
-            <h2 class="text-xl sm:text-2xl font-bold text-[#f4f4f5]">Send us a Message</h2>
-            <p class="text-[14px] text-[#a1a1aa]">
-              Fill out the form below and our chess engineering team will review it.
-            </p>
-          </div>
-
-          <form id="contact-form" class="space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label for="name" class="block text-[13px] font-medium text-[#f4f4f5] mb-1.5">
-                  Your Name <span class="text-[#00dfd8]">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="e.g. Alex Smith"
-                  class="w-full bg-[#18181b] border border-[#27272a] rounded-[8px] px-3.5 py-2.5 text-[14px] text-[#f4f4f5] placeholder-[#71717a] focus:outline-none focus:border-[#0070f3] focus:ring-1 focus:ring-[#0070f3] transition-colors"
-                />
-              </div>
-
-              <div>
-                <label for="email" class="block text-[13px] font-medium text-[#f4f4f5] mb-1.5">
-                  Email Address <span class="text-[#00dfd8]">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="alex@example.com"
-                  class="w-full bg-[#18181b] border border-[#27272a] rounded-[8px] px-3.5 py-2.5 text-[14px] text-[#f4f4f5] placeholder-[#71717a] focus:outline-none focus:border-[#0070f3] focus:ring-1 focus:ring-[#0070f3] transition-colors"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label for="subject" class="block text-[13px] font-medium text-[#f4f4f5] mb-1.5">
-                Topic / Subject <span class="text-[#00dfd8]">*</span>
-              </label>
-              <select
-                id="subject"
-                name="subject"
-                required
-                class="w-full bg-[#18181b] border border-[#27272a] rounded-[8px] px-3.5 py-2.5 text-[14px] text-[#f4f4f5] focus:outline-none focus:border-[#0070f3] focus:ring-1 focus:ring-[#0070f3] transition-colors"
-              >
-                <option value="feature">💡 Feature Suggestion</option>
-                <option value="engine">⚡ Stockfish Engine / Evaluation Query</option>
-                <option value="bug">🐛 Bug Report / Board Glitch</option>
-                <option value="guide">📚 Learn & Strategy Content Feedback</option>
-                <option value="business">🤝 Partnership / Business Inquiry</option>
-                <option value="other">💬 General Question</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="message" class="block text-[13px] font-medium text-[#f4f4f5] mb-1.5">
-                Message <span class="text-[#00dfd8]">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                required
-                placeholder="Share your thoughts, feature ideas, or paste a FEN position if you are reporting an issue..."
-                class="w-full bg-[#18181b] border border-[#27272a] rounded-[8px] px-3.5 py-2.5 text-[14px] text-[#f4f4f5] placeholder-[#71717a] focus:outline-none focus:border-[#0070f3] focus:ring-1 focus:ring-[#0070f3] transition-colors resize-none"
-              ></textarea>
-            </div>
-
-            <div class="pt-2">
-              <Button type="submit" id="submit-btn" variant="primary" class="w-full justify-center">
-                Send Message →
-              </Button>
-            </div>
-          </form>
-
-          <!-- Success Message State -->
-          <div id="contact-success" class="hidden p-6 rounded-[10px] bg-[#10b981]/10 border border-[#10b981]/30 text-center space-y-3">
-            <div class="w-12 h-12 mx-auto rounded-full bg-[#10b981]/20 flex items-center justify-center text-[#10b981]">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-[#f4f4f5]">Thank You for Your Feedback!</h3>
-            <p class="text-[14px] text-[#a1a1aa] max-w-sm mx-auto">
-              Your message has been received. Our team will review your inquiry and follow up shortly.
-            </p>
-            <div class="pt-2">
-              <Button id="reset-btn" variant="secondary" class="text-xs">
-                Send Another Note
-              </Button>
-            </div>
-          </div>
-        </Card>
-      </div>
+      <p class="text-xs sm:text-sm text-[#71717a] pt-1">
+        We typically respond within 24–48 hours. Feedback on moves, board interactions, and engine accuracy helps us improve.
+      </p>
     </div>
   </div>
 </BaseLayout>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const successMsg = document.getElementById('contact-success');
-  const resetBtn = document.getElementById('reset-btn');
+  const copyBtn = document.getElementById('copy-email-btn');
+  const copyText = document.getElementById('copy-text');
+  const email = 'support@nextmovechesss.com';
 
-  if (form && successMsg) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      form.classList.add('hidden');
-      successMsg.classList.remove('hidden');
-    });
-  }
-
-  if (resetBtn && form && successMsg) {
-    resetBtn.addEventListener('click', () => {
-      form.reset();
-      successMsg.classList.add('hidden');
-      form.classList.remove('hidden');
+  if (copyBtn && copyText) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        copyText.textContent = 'Copied!';
+        copyBtn.classList.add('text-[#00dfd8]', 'border-[#00dfd8]/40');
+        setTimeout(() => {
+          copyText.textContent = 'Copy';
+          copyBtn.classList.remove('text-[#00dfd8]', 'border-[#00dfd8]/40');
+        }, 2000);
+      } catch (e) {
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyText.textContent = 'Copy';
+        }, 2000);
+      }
     });
   }
 </script>
